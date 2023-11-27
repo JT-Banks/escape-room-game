@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Escape Room Game API
+  description: API for interacting with the Escape Room Game.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /rooms:
+    get:
+      summary: Retrieves a list of all available rooms in the game.
+      responses:
+        '200':
+          description: Successfully retrieved the list of rooms.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+
+  /rooms/{roomId}:
+    get:
+      summary: Fetches details of a specific room.
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved room details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: Room with the specified ID does not exist.
+
+  /rooms/{roomId}/items/{itemId}:
+    post:
+      summary: Manages interactions with a specific item in a room.
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+      responses:
+        '200':
+          description: Interaction was successful, item state updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '400':
+          description: Invalid request parameters or body.
+        '404':
+          description: Room or item with specified IDs does not exist.
+
+components:
+  schemas:
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the room.
+        name:
+          type: string
+          description: Name of the room.
+        description:
+          type: string
+          description: Description of the room.
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the item.
+        type:
+          type: string
+          description: Type of the item (e.g., 'drawer', 'letter').
+        state:
+          type: string
+          description: Current state of the item (e.g., 'closed', 'open').
+        content:
+          type: string
+          description: Content of the item, revealed upon interaction.
