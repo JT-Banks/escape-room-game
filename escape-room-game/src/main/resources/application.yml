@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:9tZdVRpiucPp2zrM@cluster0.xn2u0pi.mongodb.net/Game
+      username: admin
+      password: 9tZdVRpiucPp2zrM
+      authentication-database: admin
