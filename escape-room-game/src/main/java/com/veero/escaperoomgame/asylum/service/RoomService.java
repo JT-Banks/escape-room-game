@@ -21,6 +21,7 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
+
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }

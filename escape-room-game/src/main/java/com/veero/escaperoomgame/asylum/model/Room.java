@@ -19,7 +19,8 @@ public class Room {
     private List<Puzzle> puzzles;
     private List<String> hints;
 
-    public Room(String id, String name, String description, boolean isLocked, List<Item> items, List<Puzzle> puzzles, List<String> hints) {
+    public Room(String id, String name, String description, boolean isLocked,
+                List<Item> items, List<Puzzle> puzzles, List<String> hints) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,5 +30,4 @@ public class Room {
         this.hints = hints;
     }
 
-    public Room() { }
 }
