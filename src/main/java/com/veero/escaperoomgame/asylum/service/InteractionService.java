@@ -1,5 +1,6 @@
 package com.veero.escaperoomgame.asylum.service;
 
+import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
 import com.veero.escaperoomgame.asylum.model.GameObject;
 import com.veero.escaperoomgame.asylum.model.Room;
 import com.veero.escaperoomgame.asylum.repository.GameObjectRepository;
@@ -19,31 +20,23 @@ public class InteractionService {
     @Autowired
     private GameObjectRepository gameObjectRepository;
 
-    @Autowired
-    private DescriptionService descriptionService;
-
-    @Autowired
-    private RoomRepository roomRepository;
-
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public String interactWith(String id) {
+    public InteractionResponse interactWith(String interactionId) {
+        return gameObjectRepository.findByInteractionId(interactionId)
+                .stream()
+                .findFirst()
+                .map(this::convertToInteractionResponse)
+                .orElse(null);
+    }
 
-        log.info("Searching for object with ID: " + id);
-
-        List<GameObject> gameObjects = gameObjectRepository.findByInteractionId(id);
-
-        if (gameObjects.isEmpty()) {
-            log.warn("No object found with interactionId: " + id);
-            return "No object found with interactionId: " + id;
-        }
-        GameObject gameObject = gameObjects.get(0);
-        Optional<Room> roomOptional = roomRepository.findById(gameObject.getRoomId());
-
-        if (roomOptional.isEmpty()) {
-            return "No room found for this object.";
-        }
-        Room room = roomOptional.get();
-        return descriptionService.getDescription(gameObject, room);
+    private InteractionResponse convertToInteractionResponse(GameObject gameObject) {
+        InteractionResponse interactionResponse = new InteractionResponse();
+        interactionResponse.setName(gameObject.getName());
+        interactionResponse.setDescription(gameObject.getDescription());
+        interactionResponse.setClues(gameObject.getClues());
+        interactionResponse.setActions(gameObject.getActions());
+        interactionResponse.setRelatedObjects(gameObject.getRelatedObjects());
+        return interactionResponse;
     }
 }

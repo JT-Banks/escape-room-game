@@ -1,6 +1,7 @@
 package com.veero.escaperoomgame.asylum.controller;
 
 import com.veero.escaperoomgame.asylum.dto.InteractionRequest;
+import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
 import com.veero.escaperoomgame.asylum.service.InteractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,10 @@ public class InteractionController {
              this.interactionService = interactionService;
          }
 
-         @GetMapping("/interact/{id}")
-         public ResponseEntity<String> interactWithItem(@PathVariable String id) {
-             String description = interactionService.interactWith(id);
-             return ResponseEntity.ok(description);
+         @GetMapping("/interact/{interactionId}")
+         public ResponseEntity<InteractionResponse> interact(@PathVariable String interactionId) {
+             InteractionResponse response = interactionService.interactWith(interactionId);
+             return ResponseEntity.ok(response);
 
          }
 }
