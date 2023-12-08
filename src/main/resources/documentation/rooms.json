@@ -1,0 +1,92 @@
+//Annie's Room - Room #1
+{
+    "_id": "1",
+    "name": "Annie's Room",
+    "description": "A spooky room with writings on the wall and an eerie atmosphere. The room seems to hold secrets of its past.",
+    "isLocked": true,
+    "items": [
+      {
+        "id": "101",
+        "name": "Teddy Bear",
+        "description": "An old and worn teddy bear named Scratcher, sitting on the bed. It seems to be looking at something.",
+        "interactable": true
+      },
+      {
+        "id": "102",
+        "name": "Diary",
+        "description": "A small, dusty diary with a lock. It might contain secrets about the room.",
+        "interactable": true
+      },
+      {
+        "id": "103",
+        "name": "Painting",
+        "description": "A painting of a countryside scene, slightly askew. It feels out of place.",
+        "interactable": true
+      }
+    ],
+    "puzzles": [
+      {
+        "id": "201",
+        "description": "A sequence of numbers is scribbled on the wall, seems like a code of some sort.",
+        "solution": "4823",
+        "solved": false
+      }
+    ],
+    "hints": [
+      "The bear seems to be gazing at something specific.",
+      "The room's temperature drops near the painting."
+    ]
+  }
+
+  //Bathroom & Janitor's closet - Room #2
+  {
+    "_id": "2",
+    "name": "Bathroom & Janitor's Closet",
+    "description": "A very dirty bathroom, with a janitor closest on the far end...",
+    "isLocked": true,
+    "isDark": true,
+    "timer": 2500,
+    "solvedPuzzlesCount": 0,
+    "foundCluesCount": 0,
+    "backgroundImage": "",
+    "ambientSound": "",
+    "puzzles": [
+      {
+        "id": "201",
+        "description": "Puzzle goes here",
+        "solution": "1111",
+        "solved": false
+      }
+    ],
+    "clues": [
+      {
+        "id": "01",
+        "detail": "Details about the clue go here"
+      }
+    ],
+    "storyElements": [
+      {
+        "id": "01",
+        "name": "Name to keep track of story elements??",
+        "description": "Description goes here"
+      }
+    ],
+    "items": [
+      {
+        "id": "101",
+        "name": "Fuse",
+        "description": "A fuse, which is useless on it's own",
+        "interactable": true
+      },
+      {
+        "id": "102",
+        "name": "Janitor's jacket",
+        "description": "Part of a Janitor's uniform. Nothing too unusual...",
+        "interactable": true
+      }
+    ],
+    "hints": [
+      "Teamwork",
+      "Check the pockets"
+    ]
+  }
