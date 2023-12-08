@@ -1,0 +1,88 @@
+//Annie's Room
+{
+    "name": "door",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "door",
+    "description": "A large wooden door. The door has no handle, and appears to be locked.",
+    "clues": [
+        "This door is clearly meant to keep someone in, however, you can't seem to find a way to open it."
+    ],
+    "actions": [
+        {
+            "actionType": "OPEN",
+            "result": "The door is locked."
+        },
+        {
+            "actionType": "INSPECT",
+            "result": "The door is locked. How will you get out?"
+        }
+    ],
+    "relatedObjects": ["letters", "desk"]
+}
+
+{
+    "name": "desk",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "desk",
+    "description": "An old wooden desk with many drawers. It looks like it's been here for ages.",
+    "clues": [
+        "There are several letters inside the desk.",
+        "The desk has tiny claw marks on one side."
+    ],
+    "actions": [
+        {
+            "actionType": "OPEN",
+            "result": "You find several old letters."
+        },
+        {
+            "actionType": "INSPECT",
+            "result": "You notice claw marks that look like they were made by a small animal."
+        }
+    ],
+    "relatedObjects": ["teddyBear", "charredWall", "letters"]
+}
+
+{
+    "name": "charredWall",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "charredWall",
+    "description": "The wall is charred and blackened. It looks like it was burned.",
+    "clues": [
+        "The wall is charred and blackened. It looks like it was burned, but how?",
+        "There appears to be a name written on the wall in ash... but you can't make it out fully...Something about a 'Teddy'...?"
+    ],
+    "actions": [
+        {
+            "actionType": "INSPECT",
+            "result": "You notice a small hole in the wall."
+        }
+    ],
+    "relatedObjects": ["teddyBear", "desk"]
+}
+
+{
+    "name": "bed",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "bed",
+    "description": "A small bed with a metal frame. The springs appear to provide little support...",
+    "clues": [
+        "The bed is tattered, and without sheets.",
+        "There is a small impression in a corner of the bed, as if something small had been sleeping there..."
+    ],
+    "actions": [
+        {
+            "actionType": "INSPECT",
+            "result": "Nothing particularly interesting about the bed."
+        },
+        {
+            "actionType": "MOVE",
+            "result": "You move the bed and notice a burnt piece of paper...you can only make out a few words...something about a 'Scratcher'...?"
+        }
+    ],
+    "relatedObjects": ["teddyBear", "letters"]
+}
+
