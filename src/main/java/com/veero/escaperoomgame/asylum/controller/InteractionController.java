@@ -1,6 +1,5 @@
 package com.veero.escaperoomgame.asylum.controller;
 
-import com.veero.escaperoomgame.asylum.dto.InteractionRequest;
 import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
 import com.veero.escaperoomgame.asylum.service.InteractionService;
 import org.springframework.beans.factory.annotation.Autowired;
