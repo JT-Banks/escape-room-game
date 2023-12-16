@@ -34,4 +34,8 @@ public class AnnieRoom extends Room {
         this.ambientSound = ambientSound;
     }
 
+    public AnnieRoom() {
+        super();
+    }
+
 }
