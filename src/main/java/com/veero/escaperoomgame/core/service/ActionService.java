@@ -21,8 +21,8 @@ public class ActionService {
                 .orElseThrow(() -> new IllegalArgumentException("Game object not found"));
 
         Action selectedAction = gameObject.getActions().stream()
-                .filter(a -> a.getActionType().equals(actionType)).findFirst().orElseThrow(()
-                -> new IllegalArgumentException("Action not found"));
+                .filter(a -> a.getActionType().equalsIgnoreCase(actionType)).findFirst().orElseThrow(()
+                -> new IllegalArgumentException("Action not found for: " + actionType));
 
         String result = executeAction(selectedAction);
 

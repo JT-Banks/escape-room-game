@@ -17,6 +17,7 @@ public class Player {
 
     @Autowired
     GameObjectRepository gameObjectRepository;
+
     public String performAction(String objectId, String actionType) {
         GameObject gameObject = gameObjectRepository.findById(objectId).orElse(null);
         if (gameObject == null) {
