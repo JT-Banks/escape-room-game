@@ -17,10 +17,10 @@ public class AsylumPuzzleServiceImpl implements PuzzleService {
     }
 
         private boolean solveAnniePuzzle1(String solution) {
-            return solution.equals("annie");
+            return solution.equals("mock code for now, annie puzzle 1");
         }
 
         private boolean solveAnniePuzzle2(String solution) {
-            return solution.equals("janitor");
+            return solution.equals("mock code for now, annie puzzle 2");
     }
 }

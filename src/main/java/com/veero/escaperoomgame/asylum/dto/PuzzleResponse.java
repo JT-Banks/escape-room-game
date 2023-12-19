@@ -1,5 +1,8 @@
 package com.veero.escaperoomgame.asylum.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PuzzleResponse {
     public void checkIfSolved(boolean isSolved) {
         /*
