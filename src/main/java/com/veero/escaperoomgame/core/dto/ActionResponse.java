@@ -7,8 +7,10 @@ public class ActionResponse {
 
     private boolean success;
 
-    private String message;
+    private String result;
 
-    public ActionResponse(boolean bool, String result) {
+    public ActionResponse(boolean success, String result) {
+        this.success = success;
+        this.result = result;
     }
 }
