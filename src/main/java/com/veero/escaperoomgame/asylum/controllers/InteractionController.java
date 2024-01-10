@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.asylum.controller;
+package com.veero.escaperoomgame.asylum.controllers;
 
 import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
 import com.veero.escaperoomgame.asylum.service.InteractionService;

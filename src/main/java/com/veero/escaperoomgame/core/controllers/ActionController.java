@@ -20,7 +20,7 @@ public class ActionController {
     }
 
     @PostMapping("/{roomId}/{interactionId}")
-    public ResponseEntity<?> performAction(@PathVariable String roomId,
+    public ResponseEntity<ActionResponse> performAction(@PathVariable String roomId,
                                            @PathVariable String interactionId,
                                            @RequestBody ActionRequest request) {
         ActionResponse response = actionService.performAction(roomId, interactionId, request.getActionType());

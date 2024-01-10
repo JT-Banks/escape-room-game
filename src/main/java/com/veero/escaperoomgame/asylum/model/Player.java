@@ -1,30 +1,49 @@
 package com.veero.escaperoomgame.asylum.model;
 
-import com.veero.escaperoomgame.asylum.repository.GameObjectRepository;
+import com.veero.escaperoomgame.asylum.dto.Inventory;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 @Data
-public class Player {
-    private String id;
+public class Player implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+    public enum PlayerStatus {
+        PLAYING,
+        PAUSED,
+        WON,
+        LOST
+    }
+
+    private PlayerStatus status;
+
+    private String playerId;
+
     private String name;
+
     private String currentRoomId;
-    private List<Item> inventory;
+
+    private String interactionId;
+
+    private Inventory inventory;
+
     private List<Action> actions;
 
-    @Autowired
-    GameObjectRepository gameObjectRepository;
+    private double timeRemaining;
 
-    public String performAction(String objectId, String actionType) {
-        GameObject gameObject = gameObjectRepository.findById(objectId).orElse(null);
-        if (gameObject == null) {
-            return "Object not found";
+    private int score;
+
+    public void applyTimePenalty(double penalty) {
+        this.timeRemaining -= penalty;
+
+        if (this.timeRemaining < 0) {
+            this.timeRemaining = 0;
+            this.status = PlayerStatus.LOST;
         }
-        Optional<Action> action = gameObject.getActions().stream()
-                .filter(a -> a.getActionType().equals(actionType)).findFirst();
-        return action.map(Action::getResult).orElse("Action not available");
     }
+
 }

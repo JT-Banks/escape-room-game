@@ -19,10 +19,6 @@ public class ActionService {
     }
 
     public ActionResponse performAction(String roomId, String interactionId, String actionType) {
-        //Logic to handle the action
-        //looking up the room and object, and then performing the action
-        //returning the response
-
         GameObject gameObject = gameObjectRepository.findByRoomIdAndInteractionId(roomId, interactionId)
                 .orElseThrow(() -> new IllegalArgumentException("Game object not found"));
 
@@ -44,6 +40,5 @@ public class ActionService {
 
     private String executeAction(Action action) {
         return action.getResult();
-
     }
 }

@@ -4,13 +4,23 @@ import lombok.Data;
 
 @Data
 public class Item {
-    private String id;
-    private String name;
-    private String interaction;
 
-    public Item(String id, String name, String interaction) {
+    private String id;
+
+    private String name;
+
+    private String description;
+
+    private String type;
+
+    private String use;
+
+    public Item(String id, String name, String description, String type, String use) {
         this.id = id;
         this.name = name;
-        this.interaction = interaction;
+        this.description = description;
+        this.type = type;
+        this.use = use;
     }
+
 }
