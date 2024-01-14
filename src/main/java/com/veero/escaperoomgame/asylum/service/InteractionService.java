@@ -20,8 +20,6 @@ public class InteractionService {
     @Autowired
     private GameObjectRepository gameObjectRepository;
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-
     public InteractionResponse interactWith(String interactionId) {
         return gameObjectRepository.findByInteractionId(interactionId)
                 .stream()

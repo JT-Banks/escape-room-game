@@ -30,4 +30,7 @@ public class Room {
         this.hints = hints;
     }
 
+    public Room() {
+
+    }
 }
