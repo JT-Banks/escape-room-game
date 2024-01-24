@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.asylum.dto;
+package com.veero.escaperoomgame.core.dto;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import lombok.Data;
@@ -9,11 +9,13 @@ import java.util.List;
 
 @Component
 @Data
-public class Inventory {
+public class InventoryItem {
 
     private List<Item> items;
+    private String itemId;
+    private String itemName;
 
-    public Inventory() {
+    public InventoryItem() {
         this.items = new ArrayList<>();
     }
 

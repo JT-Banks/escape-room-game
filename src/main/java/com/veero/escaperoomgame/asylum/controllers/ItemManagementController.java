@@ -1,7 +1,7 @@
 package com.veero.escaperoomgame.asylum.controllers;
 
 import com.veero.escaperoomgame.asylum.dto.InventoryRequest;
-import com.veero.escaperoomgame.asylum.dto.InventoryResponse;
+import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.asylum.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/inventory")
 public class ItemManagementController {
 
-    private final InventoryResponse inventoryResponse;
-
+    @Autowired
     private final InventoryService inventoryService;
 
     @Autowired
-    public ItemManagementController(InventoryResponse inventoryResponse, InventoryService inventoryService) {
-        this.inventoryResponse = inventoryResponse;
+    public ItemManagementController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
