@@ -1,0 +1,12 @@
+//Items Request
+{
+    "playerId": "Sam",
+    "itemId": "03",
+    "itemName": "key"
+}
+
+//Items Response
+{
+    "success": true,
+    "itemDescription": "This key is very small, it looks doubtful it would unluck a door..."
+}
