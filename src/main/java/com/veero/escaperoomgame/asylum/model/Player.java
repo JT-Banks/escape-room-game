@@ -12,12 +12,15 @@ public class Player implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
     public enum PlayerStatus {
         PLAYING,
         PAUSED,
         WON,
         LOST
     }
+
+    private String playerName;
 
     private PlayerStatus status;
 
