@@ -1,7 +1,8 @@
 package com.veero.escaperoomgame.core.controllers;
 
+import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
-import com.veero.escaperoomgame.core.dto.InventoryItem;
+import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
 import com.veero.escaperoomgame.core.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/player")
@@ -18,7 +21,7 @@ public class PlayerController {
     private PlayerRepository playerRepository;
 
     @Autowired
-    private InventoryItem inventoryItems;
+    private Inventory inventoryItems;
 
     @PostMapping("/create")
     public ResponseEntity<PlayerCreationResponse> createPlayer(@RequestBody Player newPlayerData) {
@@ -41,17 +44,27 @@ public class PlayerController {
         newPlayer.setSpecialAbility(newPlayerData.getSpecialAbility());
         newPlayer.setStarterItem(newPlayerData.getStarterItem());
         newPlayer.setStatus(Player.PlayerStatus.PLAYING);
+        newPlayer.setCurrentRoomId("1");
+        newPlayer.setInteractionId("1");
         newPlayer.setScore(0);
         newPlayer.setTimeRemaining(60.0);
-        createInventoryItem(newPlayerData.getStarterItem());
-        playerRepository.save(newPlayer);
+
+        // Initialize the player's inventory with the starter item
+        Item starterItem = createStarterItem(newPlayerData.getStarterItem());
+        newPlayer.addItemToInventory(starterItem); // Using the new method in Player
+
         return newPlayer;
     }
 
-    private InventoryItem createInventoryItem(String starterItem) {
-        InventoryItem inventoryItems = new InventoryItem();
-        inventoryItems.setItemId("1");
-        inventoryItems.setItemName(starterItem);
+    private Item createStarterItem(String starterItemName) {
+        return new Item("starterItemID", starterItemName, "Description based on starter item", "Type", "Use");
+    }
+
+    private Inventory createInventoryItem(String starterItem) {
+        Inventory inventoryItems = new Inventory();
+        Item flashlight = new Item("1", "flashlight", "A flashlight to help you see in the dark", "1", "Illuminate darkness");
+        inventoryItems.setItems(inventoryItems.getItems());
+        inventoryItems.addItem(flashlight);
         return inventoryItems;
     }
 
@@ -62,7 +75,8 @@ public class PlayerController {
                 newPlayer.getBackground(),
                 newPlayer.getDifficultyLevel(),
                 newPlayer.getSpecialAbility(),
-                newPlayer.getStarterItem()
+                newPlayer.getStarterItem(),
+                newPlayer.getInventory()
         );
     }
 }

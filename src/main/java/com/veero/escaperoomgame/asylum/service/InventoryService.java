@@ -1,6 +1,6 @@
 package com.veero.escaperoomgame.asylum.service;
 
-import com.veero.escaperoomgame.core.dto.InventoryItem;
+import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.model.Player;
 import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class InventoryService {
         Optional<Player> playerOptional = playerRepository.findByPlayerId(playerId);
         if (playerOptional.isPresent()) {
             Player player = playerOptional.get();
-            InventoryItem inventoryItem = new InventoryItem();
-            player.getInventory().add(inventoryItem);
+            Inventory inventory = new Inventory();
+            player.getInventory().add(inventory);
             playerRepository.save(player);
             return true;
         } else {
@@ -32,8 +32,8 @@ public class InventoryService {
         Optional<Player> playerOptional = playerRepository.findByPlayerId(playerId);
         if (playerOptional.isPresent()) {
             Player player = playerOptional.get();
-            InventoryItem inventoryItem = new InventoryItem();
-            player.getInventory().remove(inventoryItem);
+            Inventory inventory = new Inventory();
+            player.getInventory().remove(inventory);
             playerRepository.save(player);
             return true;
         } else {
@@ -41,7 +41,7 @@ public class InventoryService {
         }
     }
 
-    public List<InventoryItem> getEntireInventory(String playerId) {
+    public List<Inventory> getEntireInventory(String playerId) {
         Optional<Player> playerInventory = playerRepository.findByPlayerId(playerId);
         if (playerInventory.isPresent()) {
             return playerInventory.get().getInventory();

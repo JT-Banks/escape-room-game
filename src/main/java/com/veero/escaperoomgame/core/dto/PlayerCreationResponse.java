@@ -17,15 +17,20 @@ public class PlayerCreationResponse {
 
     private String starterItem;
 
+    private Inventory inventory;
+
     private boolean success;
 
-    public PlayerCreationResponse(String playerId, String playerName, String background, String difficulty, String specialAbility, String starterItem) {
+    public PlayerCreationResponse(String playerId, String playerName, String background, String difficulty,
+            String specialAbility, String starterItem, Inventory inventory)
+    {
         this.playerId = playerId;
         this.playerName = playerName;
         this.background = background;
         this.difficulty = difficulty;
         this.specialAbility = specialAbility;
         this.starterItem = starterItem;
+        this.inventory = inventory;
         this.success = true;
 
     }
