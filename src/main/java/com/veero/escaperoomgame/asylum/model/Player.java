@@ -1,6 +1,5 @@
 package com.veero.escaperoomgame.asylum.model;
 
-import com.veero.escaperoomgame.asylum.dto.Inventory;
 import lombok.Data;
 
 import java.io.Serial;

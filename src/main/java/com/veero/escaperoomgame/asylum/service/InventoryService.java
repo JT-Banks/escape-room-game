@@ -1,6 +1,6 @@
 package com.veero.escaperoomgame.asylum.service;
 
-import com.veero.escaperoomgame.asylum.dto.Inventory;
+import com.veero.escaperoomgame.asylum.model.Inventory;
 import com.veero.escaperoomgame.asylum.model.Player;
 import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
