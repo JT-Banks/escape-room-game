@@ -22,14 +22,14 @@ public class PlayerCreationResponse {
     private boolean success;
 
     public PlayerCreationResponse(String playerId, String playerName, String background, String difficulty,
-            String specialAbility, String starterItem, Inventory inventory)
+                                  String specialAbility, String starterItem, Inventory inventory)
     {
         this.playerId = playerId;
         this.playerName = playerName;
         this.background = background;
         this.difficulty = difficulty;
         this.specialAbility = specialAbility;
-        this.starterItem = starterItem;
+        this.starterItem = String.valueOf(starterItem);
         this.inventory = inventory;
         this.success = true;
 

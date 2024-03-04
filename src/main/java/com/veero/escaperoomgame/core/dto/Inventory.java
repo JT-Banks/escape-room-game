@@ -35,4 +35,5 @@ public class Inventory {
                 .findFirst()
                 .orElse(null); // Maybe an Optional<Item> instead
     }
+
 }

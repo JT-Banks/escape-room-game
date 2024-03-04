@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/game")
+@SuppressWarnings("unused")
 public class GameController {
 
     @PostMapping("/interact")

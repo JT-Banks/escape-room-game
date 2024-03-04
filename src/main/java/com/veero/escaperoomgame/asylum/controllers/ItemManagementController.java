@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/inventory")
+@SuppressWarnings("unused")
 public class ItemManagementController {
 
     @Autowired
@@ -21,7 +22,7 @@ public class ItemManagementController {
 
     @PostMapping("/add")
     public ResponseEntity<InventoryResponse> addItemToInventory(@RequestBody InventoryRequest request) {
-        boolean success = inventoryService.addItem(request.getPlayerId(), request.getItemId());
+        boolean success = inventoryService.addItem(request.getPlayerId(), request.getItem());
         return ResponseEntity.ok(new InventoryResponse(success));
     }
 }
