@@ -1,8 +1,5 @@
-package com.veero.escaperoomgame.asylum.dto;
+package com.veero.escaperoomgame.core.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class InventoryResponse {
 
     private boolean success;
