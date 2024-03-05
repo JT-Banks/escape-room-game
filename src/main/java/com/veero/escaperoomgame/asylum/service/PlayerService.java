@@ -31,6 +31,7 @@ public class PlayerService {
 
         // Initialize the player's inventory with the starter item
         Item starterItem = starterItemService.getStarterItem(newPlayerData.getStarterItem());
+        newPlayer.setStarterItem(starterItem.getName());
         newPlayer.addItemToInventory(starterItem); // Using the new method in Player
 
         return newPlayer;
