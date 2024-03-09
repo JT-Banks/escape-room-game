@@ -27,12 +27,12 @@ public class PlayerService {
         newPlayer.setCurrentRoomId("1");
         newPlayer.setInteractionId("1");
         newPlayer.setScore(0);
-        newPlayer.setTimeRemaining(60.0);
+        newPlayer.setTimeRemaining(60.00);
 
         // Initialize the player's inventory with the starter item
         Item starterItem = starterItemService.getStarterItem(newPlayerData.getStarterItem());
         newPlayer.setStarterItem(starterItem.getName());
-        newPlayer.addItemToInventory(starterItem); // Using the new method in Player
+        newPlayer.addItemToInventory(starterItem);
 
         return newPlayer;
     }

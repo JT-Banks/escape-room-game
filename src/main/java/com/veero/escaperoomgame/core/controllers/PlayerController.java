@@ -36,6 +36,7 @@ public class PlayerController {
     public ResponseEntity<PlayerCreationResponse> createPlayer(@RequestBody Player newPlayerData) {
         Player newPlayer = playerService.createNewPlayer(newPlayerData);
         PlayerCreationResponse response = playerService.createPlayerResponse(newPlayer);
+        mongoTemplate.save(newPlayer, "player");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
