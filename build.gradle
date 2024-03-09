@@ -40,12 +40,13 @@ dependencies {
 }
 
 openApiGenerate {
-	generatorName = "spring"
+	generatorName = 'spring'
 	inputSpec = "$projectDir/src/main/resources/specifications.yml"
-	outputDir = "$buildDir/generated"
-	modelPackage = "com.veero.ecape-room-game.model"
-	groupId = "com.veero"
+	outputDir = layout.buildDirectory.dir("generated/openapi").get().asFile.absolutePath
+	modelPackage = 'com.veero.ecape-room-game.model'
+	groupId = 'com.veero'
 }
+
 
 
 

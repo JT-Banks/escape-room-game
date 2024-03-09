@@ -1,0 +1,42 @@
+{
+    "inventory": [
+        {
+            "items": [
+                {
+                    "id": "1",
+                    "name": "flashlight",
+                    "description": "A flashlight to help you see in the dark",
+                    "type": "1",
+                    "use": "Illuminate"
+                },
+                {
+                    "id": "54",
+                    "name": "key",
+                    "description": "A rusted old key",
+                    "type": "1",
+                    "use": "open door"
+                }
+            ]
+        }
+    ]
+}
+
+//I need a mongoDB document structure for a lookup collection for items
+{
+    "items": [
+        {
+            "id": "1",
+            "name": "flashlight",
+            "description": "A flashlight to help you see in the dark",
+            "type": "1",
+            "use": "Illuminate"
+        },
+        {
+            "id": "54",
+            "name": "key",
+            "description": "A rusted old key",
+            "type": "1",
+            "use": "open door"
+        }
+    ]
+}

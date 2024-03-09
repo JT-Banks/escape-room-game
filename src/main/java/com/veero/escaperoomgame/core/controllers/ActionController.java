@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/action")
+@SuppressWarnings("unused")
 public class ActionController {
 
     private final ActionService actionService;
