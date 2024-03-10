@@ -1,8 +1,8 @@
 package com.veero.escaperoomgame.core.model;
 
 import com.veero.escaperoomgame.asylum.model.Item;
-import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.asylum.model.Action;
+import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -51,19 +51,22 @@ public class Player implements Serializable {
 
     private int score;
 
-    public Player() {
-        this.inventory = new Inventory();
+    public void addItem(Item item) {
+        if (this.inventory != null) {
+            this.inventory.addItem(item);
+        }
     }
 
-    public void addItemToInventory(Item item) {
-        this.inventory.addItem(item);
+    public boolean removeItem(Item item) {
+        if (this.inventory != null) {
+            return this.inventory.removeItem(item);
+        }
+        return false;
     }
 
-    // Method to remove item from inventory
-    public boolean removeItemFromInventory(Item item) {
-        return this.inventory.removeItem(item);
-    }
+    public void getEntireInventory(InventoryResponse response) {
 
+    }
     public void applyTimePenalty(double penalty) {
         this.timeRemaining -= penalty;
         if (this.timeRemaining < 0) {

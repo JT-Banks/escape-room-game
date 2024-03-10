@@ -1,39 +1,25 @@
 package com.veero.escaperoomgame.core.dto;
 
-import com.veero.escaperoomgame.asylum.model.Item;
 import lombok.Data;
-import org.springframework.stereotype.Component;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
 @Data
+@Document(collection = "inventory")
 public class Inventory {
 
-    private List<Item> items;
+    @Id
+    private String id; // This could be the playerId if there's a one-to-one relationship
 
-    public Inventory() {
-        this.items = new ArrayList<>();
+    private List<String> itemIds; // References to Item IDs
+
+    public void addItem(String itemId) {
+        this.itemIds.add(itemId);
     }
 
-    public void addItem(Item item) {
-        this.items.add(item);
+    public boolean removeItem(String itemId) {
+        return this.itemIds.remove(itemId);
     }
-
-    public boolean removeItem(Item item) {
-        return this.items.remove(item);
-    }
-
-    public boolean hasItem(String itemId) {
-        return this.items.stream().anyMatch(item -> item.getId().equals(itemId));
-    }
-
-    public Item findItemById(String itemId) {
-        return this.items.stream()
-                .filter(item -> item.getId().equals(itemId))
-                .findFirst()
-                .orElse(null); // Maybe an Optional<Item> instead
-    }
-
 }

@@ -23,14 +23,14 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
-    @Autowired
-    public PlayerController(PlayerRepository playerRepository, PlayerService playerService) {
-        this.playerRepository = playerRepository;
-        this.playerService = playerService;
-    }
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    public PlayerController(PlayerRepository playerRepository, PlayerService playerService, MongoTemplate mongoTemplate) {
+        this.playerRepository = playerRepository;
+        this.playerService = playerService;
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<PlayerCreationResponse> createPlayer(@RequestBody Player newPlayerData) {

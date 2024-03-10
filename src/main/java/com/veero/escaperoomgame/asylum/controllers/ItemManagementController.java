@@ -2,7 +2,7 @@ package com.veero.escaperoomgame.asylum.controllers;
 
 import com.veero.escaperoomgame.asylum.dto.InventoryRequest;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
-import com.veero.escaperoomgame.asylum.service.InventoryService;
+import com.veero.escaperoomgame.core.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class ItemManagementController {
 
     @PostMapping("/add")
     public ResponseEntity<InventoryResponse> addItemToInventory(@RequestBody InventoryRequest request) {
-        boolean success = inventoryService.addItem(request.getPlayerId(), request.getItem());
-        return ResponseEntity.ok(new InventoryResponse(success));
+        boolean success = inventoryService.addItemToInventory(request.getPlayerId(), String.valueOf(request.getItem()));
+        return ResponseEntity.ok(new InventoryResponse("playerId", success, "Item added successfully."));
     }
 }

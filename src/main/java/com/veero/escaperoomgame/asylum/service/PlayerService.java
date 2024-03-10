@@ -1,6 +1,7 @@
 package com.veero.escaperoomgame.asylum.service;
 
 import com.veero.escaperoomgame.asylum.model.Item;
+import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
 import com.veero.escaperoomgame.core.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class PlayerService {
         // Initialize the player's inventory with the starter item
         Item starterItem = starterItemService.getStarterItem(newPlayerData.getStarterItem());
         newPlayer.setStarterItem(starterItem.getName());
-        newPlayer.addItemToInventory(starterItem);
+        newPlayer.addItem(starterItem);
 
         return newPlayer;
     }
@@ -45,7 +46,7 @@ public class PlayerService {
                 newPlayer.getDifficultyLevel(),
                 newPlayer.getSpecialAbility(),
                 newPlayer.getStarterItem(),
-                newPlayer.getInventory()
+                (Inventory) newPlayer.getInventory()
         );
     }
 }
