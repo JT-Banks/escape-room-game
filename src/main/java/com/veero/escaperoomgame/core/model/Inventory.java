@@ -9,4 +9,9 @@ public interface Inventory {
     boolean removeItem(String itemId);
 
     InventoryResponse getEntireInventory(String playerId);
+
+    boolean hasItem(String itemId);
+
+    Item findItemById(String itemId);
+
 }

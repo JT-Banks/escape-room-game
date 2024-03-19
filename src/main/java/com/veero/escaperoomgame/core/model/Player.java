@@ -1,9 +1,11 @@
 package com.veero.escaperoomgame.core.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.model.Action;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import lombok.Data;
+import lombok.Value;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serial;
@@ -53,13 +55,13 @@ public class Player implements Serializable {
 
     public void addItem(Item item) {
         if (this.inventory != null) {
-            this.inventory.addItem(item);
+            this.inventory.addItem(String.valueOf(item));
         }
     }
 
     public boolean removeItem(Item item) {
         if (this.inventory != null) {
-            return this.inventory.removeItem(item);
+            return this.inventory.removeItem(String.valueOf(item));
         }
         return false;
     }

@@ -11,7 +11,4 @@ public interface PlayerRepository extends MongoRepository<Player, String> {
 
     //Create a new player
     Player save(Player player);
-
-    //Save item to inventory
-    Player saveItem(Player player);
 }

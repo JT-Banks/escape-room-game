@@ -19,13 +19,13 @@ public class ItemService {
         }
     }
 
-    public void dropItem(String itemId) {
-        if (player.getInventory().hasItem(itemId)) {
-            player.getInventory().removeItem(player.getInventory().findItemById(itemId));
-        } else {
-            throw new IllegalArgumentException("Player does not have item with ID: " + itemId);
-        }
-    }
+//    public void dropItem(String itemId) {
+//        if (player.getInventory().hasItem(itemId)) {
+//            player.getInventory().removeItem(player.getInventory().findItemById(itemId));
+//        } else {
+//            throw new IllegalArgumentException("Player does not have item with ID: " + itemId);
+//        }
+//    }
 
     public void examineItem(String itemId) {
         if (player.getInventory().hasItem(itemId)) {

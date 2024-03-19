@@ -2,6 +2,7 @@ package com.veero.escaperoomgame.core.service;
 
 import com.veero.escaperoomgame.asylum.repository.ItemRepository;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
+import com.veero.escaperoomgame.core.model.AbstractInventory;
 import com.veero.escaperoomgame.core.model.Inventory;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class InventoryService {
+public class InventoryService extends AbstractInventory {
 
     private final InventoryRepository inventoryRepository;
     private final ItemRepository itemRepository;
@@ -22,7 +23,7 @@ public class InventoryService {
     }
 
     public boolean addItemToInventory(String inventoryId, String itemId) {
-        if (!itemRepository.existsById(itemId)) {
+        if (!itemRepository.existsByItemId(itemId)) {
             throw new IllegalArgumentException("Item not found with ID: " + itemId);
         }
 
@@ -55,4 +56,8 @@ public class InventoryService {
         }
     }
 
+    @Override
+    public void useItem(String itemId) {
+
+    }
 }

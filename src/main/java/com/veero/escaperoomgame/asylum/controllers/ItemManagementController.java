@@ -22,7 +22,7 @@ public class ItemManagementController {
 
     @PostMapping("/add")
     public ResponseEntity<InventoryResponse> addItemToInventory(@RequestBody InventoryRequest request) {
-        boolean success = inventoryService.addItemToInventory(request.getPlayerId(), String.valueOf(request.getItem()));
+        boolean success = inventoryService.addItemToInventory(request.getPlayerId(), String.valueOf(request.getItemId()));
         return ResponseEntity.ok(new InventoryResponse("playerId", success, "Item added successfully."));
     }
 }
