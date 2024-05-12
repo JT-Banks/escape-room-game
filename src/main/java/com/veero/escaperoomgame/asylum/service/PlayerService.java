@@ -1,11 +1,16 @@
 package com.veero.escaperoomgame.asylum.service;
 
+import com.veero.escaperoomgame.asylum.model.Action;
 import com.veero.escaperoomgame.asylum.model.Item;
-import com.veero.escaperoomgame.core.dto.Inventory;
+import com.veero.escaperoomgame.asylum.model.Room;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
+import com.veero.escaperoomgame.core.model.DefaultInventory;
 import com.veero.escaperoomgame.core.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class PlayerService {
@@ -13,28 +18,32 @@ public class PlayerService {
     @Autowired
     private StarterItemService starterItemService;
 
+    @Autowired
+    private RoomService roomService;
+
     public Player createNewPlayer(Player newPlayerData) {
-        // Logic to create a new player
-        // Similar to your initializePlayer method
+
+        Room startingRoom = roomService.getStartingRoom();
         Player newPlayer = new Player();
         newPlayer.setPlayerName(newPlayerData.getPlayerName());
-        newPlayer.setPlayerId(String.valueOf((int) (Math.random() * 9000) + 1000));
+        newPlayer.setPlayerId(UUID.randomUUID().toString());
         newPlayer.setBackground(newPlayerData.getBackground());
         newPlayer.setDifficultyLevel(newPlayerData.getDifficultyLevel());
         newPlayer.setSpecialAbility(newPlayerData.getSpecialAbility());
         newPlayer.setStatus(Player.PlayerStatus.PLAYING);
-        //Need to set the player's current room and interaction to the first room and interaction
-        //First room is 'Annie's Room' = "1", second room = "2" etc.
-        newPlayer.setCurrentRoomId("1");
-        newPlayer.setInteractionId("1");
+        newPlayer.setCurrentRoomId(startingRoom.getId());
         newPlayer.setScore(0);
         newPlayer.setTimeRemaining(60.00);
 
-        // Initialize the player's inventory with the starter item
+        newPlayer.setInventory(new DefaultInventory());
+
         Item starterItem = starterItemService.getStarterItem(newPlayerData.getStarterItem());
         newPlayer.setStarterItem(starterItem.getName());
         newPlayer.addItem(starterItem);
 
+        //newPlayer.setActions(new ArrayList<>());
+        newPlayer.getActions().add(createAction("inspect".toLowerCase()));
+        newPlayer.getActions().add(createAction("use".toLowerCase()));
         return newPlayer;
     }
 
@@ -46,8 +55,15 @@ public class PlayerService {
                 newPlayer.getDifficultyLevel(),
                 newPlayer.getSpecialAbility(),
                 newPlayer.getStarterItem(),
-                (Inventory) newPlayer.getInventory()
+                newPlayer.getInventory(),
+                newPlayer.getActions()
         );
+    }
+
+    private Action createAction(String actionType) {
+        Action action = new Action();
+        action.setActionType(actionType);
+        return action;
     }
 }
 

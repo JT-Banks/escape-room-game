@@ -1,15 +1,13 @@
 package com.veero.escaperoomgame.core.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.model.Action;
-import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import lombok.Data;
-import lombok.Value;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 //TODO: MOVE ALL SERIALIZABLE CLASSES TO OPENAPI GENERATION!!!!!!!!!!!!
@@ -45,9 +43,9 @@ public class Player implements Serializable {
 
     private String interactionId;
 
-    private Inventory inventory;
+    private AbstractInventory inventory;
 
-    private List<Action> actions;
+    private List<Action> actions = new ArrayList<>();
 
     private double timeRemaining;
 
@@ -55,20 +53,18 @@ public class Player implements Serializable {
 
     public void addItem(Item item) {
         if (this.inventory != null) {
-            this.inventory.addItem(String.valueOf(item));
+            this.inventory.addItem(item);
         }
     }
 
     public boolean removeItem(Item item) {
         if (this.inventory != null) {
-            return this.inventory.removeItem(String.valueOf(item));
+            this.inventory.removeItem(item);
+            return true;
         }
         return false;
     }
 
-    public void getEntireInventory(InventoryResponse response) {
-
-    }
     public void applyTimePenalty(double penalty) {
         this.timeRemaining -= penalty;
         if (this.timeRemaining < 0) {
