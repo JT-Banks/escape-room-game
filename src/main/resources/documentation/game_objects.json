@@ -1,9 +1,10 @@
 //Annie's Room
 {
     "name": "door",
+    "isDiscovered": false,
     "interactionType": "INSPECT",
     "roomId": "1",
-    "interactionId": "door",
+    "interactionId": "door", //Possibly change to objectId, example: "door1", or "3023For"
     "description": "A large wooden door. The door has no handle, and appears to be locked.",
     "clues": [
         "This door is clearly meant to keep someone in, however, you can't seem to find a way to open it."

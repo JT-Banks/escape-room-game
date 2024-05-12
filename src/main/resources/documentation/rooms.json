@@ -1,5 +1,5 @@
 //Annie's Room - Room #1
-{
+[{
     "_id": "1",
     "name": "Annie's Room",
     "description": "A spooky room with writings on the wall and an eerie atmosphere. The room seems to hold secrets of its past.",
@@ -89,4 +89,4 @@
       "Teamwork",
       "Check the pockets"
     ]
-  }
+  }]

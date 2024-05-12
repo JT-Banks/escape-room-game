@@ -1,0 +1,55 @@
+[{
+    "itemId": "1",
+    "name": "flashlight",
+    "description": "A flashlight to help you see in the dark",
+    "type": "utility",
+    "use": "illuminate"
+},
+
+{
+    "itemId": "2",
+    "name": "notepad & pen",
+    "description": "A notepad to keep notes on what you deem important",
+    "type": "utility",
+    "use": "record" 
+},
+
+{
+    "itemId": "3",
+    "name": "Janitor Key",
+    "description": "A key that unlocks the janitor's closest",
+    "type": "key",
+    "use": "unlock" 
+},
+
+{
+    "itemId": "4",
+    "name": "Red fuse",
+    "description": "A fuse that is red",
+    "type": "utility",
+    "use": "insert" 
+},
+
+{
+    "itemId": "5",
+    "name": "Blue fuse",
+    "description": "A fuse that is blue",
+    "type": "utility",
+    "use": "insert" 
+},
+
+{
+    "itemId": "6",
+    "name": "Green fuse",
+    "description": "A fuse that is green",
+    "type": "utility",
+    "use": "insert" 
+},
+
+{
+    "itemId": "7",
+    "name": "Purple fuse",
+    "description": "A fuse that is purple",
+    "type": "utility",
+    "use": "insert" 
+}]

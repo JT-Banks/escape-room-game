@@ -17,12 +17,13 @@ public class StarterItemService {
 
     public Item getStarterItem(String itemName) {
         // Lookup the item by name from a repository or predefined list
-        Optional<Item> item = itemRepository.findByName(itemName);
+        Optional<Item> item = itemRepository.findByName(itemName.toLowerCase());
         return item.orElseGet(this::getDefaultStarterItem);
     }
 
     private Item getDefaultStarterItem() {
         // Return a default item if the requested item is not found
-        return new Item("1", "1", "Flashlight", "Default description", "Default type", "Default use");
+        return new Item("1", "1", "Flashlight", "Default description",
+                "Default type", "Default use");
     }
 }

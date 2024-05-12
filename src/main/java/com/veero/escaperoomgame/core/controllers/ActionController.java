@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/action")
-@SuppressWarnings("unused")
 public class ActionController {
 
     private final ActionService actionService;
@@ -21,16 +20,20 @@ public class ActionController {
     }
 
     @PostMapping("/{roomId}/{interactionId}")
-    public ResponseEntity<ActionResponse> performAction(@PathVariable String roomId,
-                                           @PathVariable String interactionId,
-                                           @RequestBody ActionRequest request) {
+    public ResponseEntity<ActionResponse> performAction(
+            @PathVariable String roomId,
+            @PathVariable String interactionId,
+            @RequestBody ActionRequest request
+    ) {
         ActionResponse response = actionService.performAction(roomId, interactionId, request.getActionType());
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{roomId}/{interactionId}")
-    public ResponseEntity<GameObjectResponse> getObjectDetails(@PathVariable String roomId,
-                                                               @PathVariable String interactionId) {
+    public ResponseEntity<GameObjectResponse> getObjectDetails(
+            @PathVariable String roomId,
+            @PathVariable String interactionId
+    ) {
         GameObjectResponse response = actionService.getObjectDetails(roomId, interactionId);
         return ResponseEntity.ok(response);
     }

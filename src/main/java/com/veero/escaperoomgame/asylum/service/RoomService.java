@@ -21,4 +21,10 @@ public class RoomService {
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
+
+    //Always start in starter room
+    public Room getStartingRoom() {
+        return roomRepository.findById("1")
+                .orElseThrow(() -> new IllegalArgumentException("Room not found"));
+    }
 }

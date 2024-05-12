@@ -1,11 +1,12 @@
-{
+[{
     "status": "PLAYING",
     "playerId": "091",
     "currentRoomId": "1",
     "interactionId": "1",
-    "inventory": {
-        "item1": "flashlight"
-    },
+    "inventory": [
+        "flashlight_itemId", "unique-room-key_itemId"
+
+    ],
     "actions": [
         {
             "inspect": "uhhhh"
@@ -13,4 +14,4 @@
     ],
     "timeRemaining": 2500,
     "score": 0
-}
+}]
