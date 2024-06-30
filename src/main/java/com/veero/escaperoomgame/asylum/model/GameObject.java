@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document(collection = "game_objects")
+@Document(collection = "game objects")
 public class GameObject {
     @Id
     private String id;

@@ -40,6 +40,23 @@ public class InventoryService extends AbstractInventory {
         }
     }
 
+    public boolean removeItemFromInventory(String inventoryId, String itemId) {
+        Item item = itemRepository.findByItemId(itemId);
+        if (item == null) {
+            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+        }
+
+        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(inventoryId);
+        if (inventoryOptional.isPresent()) {
+            AbstractInventory inventory = inventoryOptional.get();
+            inventory.removeItem(item);
+            inventoryRepository.save(inventory);
+            return true;
+        } else {
+            throw new IllegalArgumentException("Inventory not found with ID: " + inventoryId);
+        }
+    }
+
     public InventoryResponse getEntireInventory(String playerId) {
         if (!inventoryRepository.existsById(playerId)) {
             throw new IllegalArgumentException("Inventory not found with ID: " + playerId);
@@ -59,7 +76,16 @@ public class InventoryService extends AbstractInventory {
     }
 
     @Override
-    public void useItem(String itemId) {
+    public String useItem(String playerId, String itemId, String input) {
+        Item item = itemRepository.findByItemId(itemId);
+        if (item == null) {
+            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+        }
 
+        // Use the item
+        item.use(itemId);
+        itemRepository.save(item);
+
+        return "Item used successfully.";
     }
 }

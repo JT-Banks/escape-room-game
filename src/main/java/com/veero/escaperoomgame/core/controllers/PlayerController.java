@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @SuppressWarnings("unused")
 public class PlayerController {
 
-    //TODO: Add all the logic for items
-
     private final PlayerRepository playerRepository;
 
     private final PlayerService playerService;

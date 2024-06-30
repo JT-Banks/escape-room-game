@@ -42,4 +42,19 @@ public class InventoryController {
         }
     }
 
+    @PostMapping("/{playerId}/useItem/{itemId}")
+    public ResponseEntity<InventoryResponse> useItem(@PathVariable String playerId, @PathVariable String itemId, @RequestBody String input) {
+        try {
+            String result = inventoryService.useItem(playerId, itemId, input);
+            if (result != null) {
+                return ResponseEntity.ok(new InventoryResponse(playerId, true, result));
+            } else {
+                return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, "Failed to use item."));
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new InventoryResponse(playerId, false, "An unexpected error occurred."));
+        }
+    }
 }

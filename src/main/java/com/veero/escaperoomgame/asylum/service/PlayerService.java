@@ -41,7 +41,6 @@ public class PlayerService {
         newPlayer.setStarterItem(starterItem.getName());
         newPlayer.addItem(starterItem);
 
-        //newPlayer.setActions(new ArrayList<>());
         newPlayer.getActions().add(createAction("inspect".toLowerCase()));
         newPlayer.getActions().add(createAction("use".toLowerCase()));
         return newPlayer;
@@ -65,5 +64,5 @@ public class PlayerService {
         action.setActionType(actionType);
         return action;
     }
-}
 
+}
