@@ -1,6 +1,5 @@
 package com.veero.escaperoomgame.core.controllers;
 
-import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,27 +28,10 @@ public class InventoryController {
     public ResponseEntity<InventoryResponse> addItem(@PathVariable String playerId, @PathVariable String itemId) {
         try {
             boolean success = inventoryService.addItemToInventory(playerId, itemId);
-
             if (success) {
                 return ResponseEntity.ok(new InventoryResponse(playerId, true, "Item added successfully."));
             } else {
                 return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, "Failed to add item."));
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, e.getMessage()));
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(new InventoryResponse(playerId, false, "An unexpected error occurred."));
-        }
-    }
-
-    @PostMapping("/{playerId}/useItem/{itemId}")
-    public ResponseEntity<InventoryResponse> useItem(@PathVariable String playerId, @PathVariable String itemId, @RequestBody String input) {
-        try {
-            String result = inventoryService.useItem(playerId, itemId, input);
-            if (result != null) {
-                return ResponseEntity.ok(new InventoryResponse(playerId, true, result));
-            } else {
-                return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, "Failed to use item."));
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(new InventoryResponse(playerId, false, e.getMessage()));

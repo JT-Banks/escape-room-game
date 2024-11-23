@@ -4,21 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum InteractionType {
-
-    WALL("wall"),
-    ITEM("item"),
-    PUZZLE("puzzle"),
-    DOOR("door"),
-    HINT("hint"),
-    DESK("desk"),
-    FUSE("fuse"),
-    VENT("vent"),
-    INSPECT("inspect");
-
+    INSPECT("inspect"),
+    INTERACT("interact"),
+    PICK_UP("pick up"),
+    OPEN("open");
     private final String type;
-
     InteractionType(String type) {
         this.type = type;
     }
-
 }

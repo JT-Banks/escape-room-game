@@ -7,16 +7,27 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 //TODO: MOVE ALL SERIALIZABLE CLASSES TO OPENAPI GENERATION!!!!!!!!!!!!
 @Data
 public class Player implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
-
+    @Id
+    private String playerId;
+    private String playerName;
+    private String background;
+    private String difficultyLevel;
+    private String specialAbility;
+    private String starterItem;
+    private PlayerStatus status;
+    private String currentRoomId;
+    private String interactionId;
+    private Inventory inventory;
+    private List<Action> actions;
+    private double timeRemaining;
+    private int score;
     public enum PlayerStatus {
         PLAYING,
         PAUSED,
@@ -24,53 +35,12 @@ public class Player implements Serializable {
         LOST
     }
 
-    @Id
-    private String playerId;
-
-    private String playerName;
-
-    private String background;
-
-    private String difficultyLevel;
-
-    private String specialAbility;
-
-    private String starterItem;
-
-    private PlayerStatus status;
-
-    private String currentRoomId;
-
-    private String interactionId;
-
-    private AbstractInventory inventory;
-
-    private List<Action> actions = new ArrayList<>();
-
-    private double timeRemaining;
-
-    private int score;
-
     public void addItem(Item item) {
         if (this.inventory != null) {
-            this.inventory.addItem(item);
+            this.inventory.addItem(String.valueOf(item));
+        } else {
+            this.inventory = new InventoryImpl();
+            this.inventory.addItem(String.valueOf(item));
         }
     }
-
-    public boolean removeItem(Item item) {
-        if (this.inventory != null) {
-            this.inventory.removeItem(item);
-            return true;
-        }
-        return false;
-    }
-
-    public void applyTimePenalty(double penalty) {
-        this.timeRemaining -= penalty;
-        if (this.timeRemaining < 0) {
-            this.timeRemaining = 0;
-            this.status = PlayerStatus.LOST;
-        }
-    }
-
 }
