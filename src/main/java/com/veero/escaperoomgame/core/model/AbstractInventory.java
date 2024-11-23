@@ -1,6 +1,7 @@
 package com.veero.escaperoomgame.core.model;
 
 import com.veero.escaperoomgame.asylum.model.Item;
+import com.veero.escaperoomgame.core.dto.InventoryResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +15,8 @@ public abstract class AbstractInventory {
         items.put(item.getId(), item);
     }
 
-    public void removeItem(String itemId) {
-        items.remove(itemId);
+    public void removeItem(Item item) {
+        items.remove(item.getId(), item);
     }
 
     public Optional<Item> getItem(String itemId) {
@@ -27,5 +28,7 @@ public abstract class AbstractInventory {
     }
 
     public abstract void useItem(String itemId);
+
+    public abstract InventoryResponse getEntireInventory(String playerId);
 
 }

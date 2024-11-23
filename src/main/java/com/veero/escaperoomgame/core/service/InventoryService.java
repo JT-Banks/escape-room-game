@@ -1,9 +1,9 @@
 package com.veero.escaperoomgame.core.service;
 
+import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.repository.ItemRepository;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.model.AbstractInventory;
-import com.veero.escaperoomgame.core.model.Inventory;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import java.util.Optional;
 public class InventoryService extends AbstractInventory {
 
     private final InventoryRepository inventoryRepository;
+
     private final ItemRepository itemRepository;
 
     @Autowired
@@ -23,15 +24,15 @@ public class InventoryService extends AbstractInventory {
     }
 
     public boolean addItemToInventory(String inventoryId, String itemId) {
-        if (!itemRepository.existsByItemId(itemId)) {
+        Item item = itemRepository.findByItemId(itemId);
+        if (item == null) {
             throw new IllegalArgumentException("Item not found with ID: " + itemId);
         }
 
-        // Fetch the inventory and add the item
-        Optional<com.veero.escaperoomgame.core.dto.Inventory> inventoryOptional = inventoryRepository.findById(inventoryId);
+        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(inventoryId);
         if (inventoryOptional.isPresent()) {
-            Inventory inventory = (Inventory) inventoryOptional.get();
-            inventory.addItem(itemId);
+            AbstractInventory inventory = inventoryOptional.get();
+            inventory.addItem(item);
             inventoryRepository.save(inventory);
             return true;
         } else {
@@ -45,10 +46,11 @@ public class InventoryService extends AbstractInventory {
         }
 
         // Fetch the inventory and add the item
-        Optional<com.veero.escaperoomgame.core.dto.Inventory> inventoryOptional = inventoryRepository.findById(playerId);
+        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(playerId);
         if (inventoryOptional.isPresent()) {
-            Inventory inventory = (Inventory) inventoryOptional.get();
-            inventory.getEntireInventory(playerId);
+            AbstractInventory inventory = inventoryOptional.get();
+            InventoryResponse response = new InventoryResponse();
+            response.setItems(inventory.getAllItems());
             inventoryRepository.save(inventory);
             return inventory.getEntireInventory(playerId);
         } else {

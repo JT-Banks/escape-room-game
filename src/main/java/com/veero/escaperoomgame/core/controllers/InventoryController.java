@@ -17,6 +17,7 @@ public class InventoryController {
     public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
+
     @GetMapping("/{playerId}/")
     public ResponseEntity<InventoryResponse> getInventory(@PathVariable String playerId) {
         InventoryResponse inventory = inventoryService.getEntireInventory(playerId);

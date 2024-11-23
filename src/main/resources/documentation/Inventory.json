@@ -1,4 +1,4 @@
-{
+[{
     "inventory": [
         {
             "items": [
@@ -38,4 +38,4 @@
             "use": "open door"
         }
     ]
-}
+}]
