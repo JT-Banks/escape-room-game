@@ -21,7 +21,6 @@
     ]
 }
 
-//I need a mongoDB document structure for a lookup collection for items
 {
     "items": [
         {

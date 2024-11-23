@@ -1,5 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.xn2u0pi.mongodb.net/Game
-
+      uri: mongodb+srv://admin:DxC28foQuJyDXBa4@cluster0.xn2u0pi.mongodb.net/Game
