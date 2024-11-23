@@ -4,7 +4,7 @@ import com.veero.escaperoomgame.asylum.model.GameObject;
 import com.veero.escaperoomgame.asylum.model.Room;
 import org.springframework.stereotype.Service;
 
-import static com.veero.escaperoomgame.core.constants.*;
+import static com.veero.escaperoomgame.core.Constants.*;
 
 @Service
 public class DescriptionService {
