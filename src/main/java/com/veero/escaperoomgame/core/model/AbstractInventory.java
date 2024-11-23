@@ -27,7 +27,17 @@ public abstract class AbstractInventory {
         return new HashMap<>(items);
     }
 
-    public abstract void useItem(String itemId);
+
+    public String useItem(String playerId, String itemId, String input) {
+        Optional<Item> optionalItem = getItem(itemId);
+        if (optionalItem.isPresent()) {
+            Item item = optionalItem.get();
+            item.use(input);
+        } else {
+            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+        }
+        return playerId;
+    }
 
     public abstract InventoryResponse getEntireInventory(String playerId);
 
