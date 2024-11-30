@@ -23,7 +23,7 @@ public class ActionService {
                 .orElseThrow(() -> new IllegalArgumentException("Game object not found"));
 
         Action selectedAction = gameObject.getActions().stream()
-                .filter(a -> a.getActionType().equalsIgnoreCase(actionType)).findFirst().orElseThrow(()
+                .filter(a -> a.getActionType().name().equalsIgnoreCase(actionType)).findFirst().orElseThrow(()
                 -> new IllegalArgumentException("Action not found for: " + actionType));
 
         String result = executeAction(selectedAction);
@@ -34,7 +34,6 @@ public class ActionService {
     public GameObjectResponse getObjectDetails(String roomId, String interactionId) {
         GameObject gameObject = gameObjectRepository.findByRoomIdAndInteractionId(roomId, interactionId)
                 .orElseThrow(() -> new IllegalArgumentException("Game object not found"));
-
         return new GameObjectResponse(gameObject.getName(), gameObject.getRoomId(), gameObject.getInteractionId(), gameObject.getDescription());
     }
 

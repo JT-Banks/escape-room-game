@@ -2,6 +2,7 @@ package com.veero.escaperoomgame.core.service;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.repository.ItemRepository;
+import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.model.AbstractInventory;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
@@ -29,10 +30,10 @@ public class InventoryService extends AbstractInventory {
             throw new IllegalArgumentException("Item not found with ID: " + itemId);
         }
 
-        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(inventoryId);
+        Optional<Inventory> inventoryOptional = inventoryRepository.findById(inventoryId);
         if (inventoryOptional.isPresent()) {
-            AbstractInventory inventory = inventoryOptional.get();
-            inventory.addItem(item);
+            Inventory inventory = inventoryOptional.get();
+            inventory.addItem(String.valueOf(item));
             inventoryRepository.save(inventory);
             return true;
         } else {
@@ -46,9 +47,9 @@ public class InventoryService extends AbstractInventory {
         }
 
         // Fetch the inventory and add the item
-        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(playerId);
+        Optional<Inventory> inventoryOptional = inventoryRepository.findById(playerId);
         if (inventoryOptional.isPresent()) {
-            AbstractInventory inventory = inventoryOptional.get();
+            Inventory inventory = inventoryOptional.get();
             InventoryResponse response = new InventoryResponse();
             response.setItems(inventory.getAllItems());
             inventoryRepository.save(inventory);
@@ -60,6 +61,6 @@ public class InventoryService extends AbstractInventory {
 
     @Override
     public void useItem(String itemId) {
-
+        //TODO: Implement useItem functionality
     }
 }

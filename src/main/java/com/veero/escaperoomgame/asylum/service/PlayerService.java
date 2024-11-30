@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import static com.veero.escaperoomgame.asylum.constants.AsylumConstants.ASYLUM_ROOM_ID;
 
 @Service
 public class PlayerService {
@@ -26,34 +29,37 @@ public class PlayerService {
         Player newPlayer = new Player();
         List<Action> actionList = new ArrayList<>();
         Action inspectAction = new Action();
-        inspectAction.setActionType("Inspect");
+        inspectAction.setActionType(InteractionType.INSPECT);
         actionList.add(inspectAction);
         newPlayer.setPlayerName(newPlayerData.getPlayerName());
-        newPlayer.setPlayerId(String.valueOf((int) (Math.random() * 9000) + 1000));
+        newPlayer.setPlayerId(UUID.randomUUID().toString());
         newPlayer.setBackground(newPlayerData.getBackground());
         newPlayer.setDifficultyLevel(newPlayerData.getDifficultyLevel());
         newPlayer.setSpecialAbility(newPlayerData.getSpecialAbility());
         newPlayer.setStatus(Player.PlayerStatus.PLAYING);
-        newPlayer.setCurrentRoomId("1");
+        newPlayer.setCurrentRoomId(ASYLUM_ROOM_ID);
         newPlayer.setInteractionId("1");
         newPlayer.setScore(0);
         newPlayer.setTimeRemaining(60.00);
         Item starterItem = starterItemService.getStarterItem(newPlayerData.getStarterItem());
         newPlayer.setStarterItem(starterItem.getName());
-        newPlayer.addItem(starterItem);
         newPlayer.setInventory(new InventoryImpl());
+        newPlayer.addItem(starterItem);
         newPlayer.setActions(actionList);
         return newPlayer;
     }
 
     public PlayerCreationResponse createPlayerResponse(Player newPlayer) {
+        boolean success = newPlayer.getInventory() != null && !newPlayer.getInventory().getItems().isEmpty();
         return new PlayerCreationResponse(
                 newPlayer.getPlayerId(),
                 newPlayer.getPlayerName(),
                 newPlayer.getBackground(),
                 newPlayer.getDifficultyLevel(),
                 newPlayer.getSpecialAbility(),
-                newPlayer.getStarterItem()
+                newPlayer.getStarterItem(),
+                newPlayer.getInventory(),
+                success
         );
     }
 }

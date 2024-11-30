@@ -3,13 +3,17 @@ package com.veero.escaperoomgame.core.model;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.veero.escaperoomgame.core.Constants.INVENTORY_CANNOT_BE_EMPTY;
 import static com.veero.escaperoomgame.core.Constants.PLAYER_CREATED;
 
-public class InventoryImpl implements Inventory {
+public class InventoryImpl implements Inventory, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final List<String> items;
 
     @Autowired
