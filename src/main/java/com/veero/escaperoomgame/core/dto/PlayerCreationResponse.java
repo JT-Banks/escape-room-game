@@ -12,6 +12,6 @@ public class PlayerCreationResponse {
     private String difficulty;
     private String specialAbility;
     private String starterItem;
-    private com.veero.escaperoomgame.core.model.Inventory inventory;
+    private Inventory inventory;
     private boolean success;
 }
