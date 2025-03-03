@@ -46,7 +46,7 @@ public class InventoryService {
         if (inventoryId == null) {
             throw new IllegalArgumentException("No inventory linked to player with ID: " + playerId);
         }
-
+      
         defaultInventory.addItem(inventoryId, item);
         return true;
     }

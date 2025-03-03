@@ -4,6 +4,8 @@ import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class DefaultInventory extends AbstractInventory {
@@ -29,6 +31,7 @@ public class DefaultInventory extends AbstractInventory {
         // Logic to "use" the item, e.g., apply its effects, remove it, etc.
         inventory.removeItem(itemId);
         inventoryRepository.save((com.veero.escaperoomgame.core.dto.Inventory) inventory);
+
     }
 
     @Override

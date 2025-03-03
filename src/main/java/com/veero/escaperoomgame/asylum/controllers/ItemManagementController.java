@@ -25,4 +25,10 @@ public class ItemManagementController {
         boolean success = inventoryService.addItemToInventory(request.getPlayerId(), request.getItem());
         return ResponseEntity.ok(new InventoryResponse("playerId", success, "Item added successfully."));
     }
+
+    @PostMapping("/remove")
+    public ResponseEntity<InventoryResponse> removeItemFromInventory(@RequestBody InventoryRequest request) {
+        boolean success = inventoryService.removeItemFromInventory(request.getPlayerId(), String.valueOf(request.getItemId()));
+        return ResponseEntity.ok(new InventoryResponse("playerId", success, "Item removed successfully."));
+    }
 }

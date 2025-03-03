@@ -38,7 +38,7 @@ public abstract class AbstractInventory {
         }
         return itemsMap;
     }
-
+  
     public abstract void useItem(String inventoryId, String itemId);
 
     public abstract InventoryResponse getEntireInventory(String inventoryId);
