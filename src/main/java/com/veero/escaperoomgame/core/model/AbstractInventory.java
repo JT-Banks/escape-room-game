@@ -2,43 +2,45 @@ package com.veero.escaperoomgame.core.model;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
+import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public abstract class AbstractInventory {
 
-    private final Map<String, Item> items = new HashMap<>();
+    protected InventoryRepository inventoryRepository;
 
-    public void addItem(Item item) {
-        items.put(item.getId(), item);
+    public AbstractInventory(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
 
-    public void removeItem(Item item) {
-        items.remove(item.getId(), item);
+    public void addItem(String inventoryId, Item item) {
+        Inventory inventory = (Inventory) inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory not found with ID: " + inventoryId));
+        inventory.addItem(item);
+        inventoryRepository.save((com.veero.escaperoomgame.core.dto.Inventory) inventory);
     }
 
-    public Optional<Item> getItem(String itemId) {
-        return Optional.ofNullable(items.get(itemId));
+    public void removeItem(String inventoryId, String itemId) {
+        Inventory inventory = (Inventory) inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory not found with ID: " + inventoryId));
+        inventory.removeItem(itemId);
+        inventoryRepository.save((com.veero.escaperoomgame.core.dto.Inventory) inventory);
     }
 
-    public Map<String, Item> getAllItems() {
-        return new HashMap<>(items);
-    }
-
-
-    public String useItem(String playerId, String itemId, String input) {
-        Optional<Item> optionalItem = getItem(itemId);
-        if (optionalItem.isPresent()) {
-            Item item = optionalItem.get();
-            item.use(input);
-        } else {
-            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+    public Map<String, Item> getAllItems(String inventoryId) {
+        Inventory inventory = (Inventory) inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory not found with ID: " + inventoryId));
+        Map<String, Item> itemsMap = new HashMap<>();
+        for (Item item : inventory.getItems()) {
+            itemsMap.put(item.getId(), item);
         }
-        return playerId;
+        return itemsMap;
     }
+  
+    public abstract void useItem(String inventoryId, String itemId);
 
-    public abstract InventoryResponse getEntireInventory(String playerId);
-
+    public abstract InventoryResponse getEntireInventory(String inventoryId);
 }
+

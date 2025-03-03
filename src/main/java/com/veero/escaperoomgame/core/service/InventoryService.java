@@ -2,8 +2,12 @@ package com.veero.escaperoomgame.core.service;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.repository.ItemRepository;
+import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
+import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.model.AbstractInventory;
+import com.veero.escaperoomgame.core.model.DefaultInventory;
+import com.veero.escaperoomgame.core.model.Player;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,81 +15,40 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class InventoryService extends AbstractInventory {
+public class InventoryService {
 
-    private final InventoryRepository inventoryRepository;
-
-    private final ItemRepository itemRepository;
+    private final DefaultInventory defaultInventory;
+    private final PlayerRepository playerRepository;
 
     @Autowired
-    public InventoryService(InventoryRepository inventoryRepository, ItemRepository itemRepository) {
-        this.inventoryRepository = inventoryRepository;
-        this.itemRepository = itemRepository;
-    }
-
-    public boolean addItemToInventory(String inventoryId, String itemId) {
-        Item item = itemRepository.findByItemId(itemId);
-        if (item == null) {
-            throw new IllegalArgumentException("Item not found with ID: " + itemId);
-        }
-
-        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(inventoryId);
-        if (inventoryOptional.isPresent()) {
-            AbstractInventory inventory = inventoryOptional.get();
-            inventory.addItem(item);
-            inventoryRepository.save(inventory);
-            return true;
-        } else {
-            throw new IllegalArgumentException("Inventory not found with ID: " + inventoryId);
-        }
-    }
-
-    public boolean removeItemFromInventory(String inventoryId, String itemId) {
-        Item item = itemRepository.findByItemId(itemId);
-        if (item == null) {
-            throw new IllegalArgumentException("Item not found with ID: " + itemId);
-        }
-
-        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(inventoryId);
-        if (inventoryOptional.isPresent()) {
-            AbstractInventory inventory = inventoryOptional.get();
-            inventory.removeItem(item);
-            inventoryRepository.save(inventory);
-            return true;
-        } else {
-            throw new IllegalArgumentException("Inventory not found with ID: " + inventoryId);
-        }
+    public InventoryService(InventoryRepository inventoryRepository, PlayerRepository playerRepository) {
+        this.defaultInventory = new DefaultInventory(inventoryRepository);
+        this.playerRepository = playerRepository;
     }
 
     public InventoryResponse getEntireInventory(String playerId) {
-        if (!inventoryRepository.existsById(playerId)) {
-            throw new IllegalArgumentException("Inventory not found with ID: " + playerId);
+        Player player = playerRepository.findById(playerId)
+                .orElseThrow(() -> new IllegalArgumentException("Player not found with ID: " + playerId));
+
+        String inventoryId = player.getInventoryId();
+        if (inventoryId == null) {
+            throw new IllegalArgumentException("No inventory linked to player with ID: " + playerId);
         }
 
-        // Fetch the inventory and add the item
-        Optional<AbstractInventory> inventoryOptional = inventoryRepository.findById(playerId);
-        if (inventoryOptional.isPresent()) {
-            AbstractInventory inventory = inventoryOptional.get();
-            InventoryResponse response = new InventoryResponse();
-            response.setItems(inventory.getAllItems());
-            inventoryRepository.save(inventory);
-            return inventory.getEntireInventory(playerId);
-        } else {
-            throw new IllegalArgumentException("Inventory not found with ID: " + playerId);
-        }
+        return defaultInventory.getEntireInventory(inventoryId);
     }
 
-    @Override
-    public String useItem(String playerId, String itemId, String input) {
-        Item item = itemRepository.findByItemId(itemId);
-        if (item == null) {
-            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+    public boolean addItemToInventory(String playerId, Item item) {
+        Player player = playerRepository.findById(playerId)
+                .orElseThrow(() -> new IllegalArgumentException("Player not found with ID: " + playerId));
+
+        String inventoryId = player.getInventoryId();
+        if (inventoryId == null) {
+            throw new IllegalArgumentException("No inventory linked to player with ID: " + playerId);
         }
-
-        // Use the item
-        item.use(itemId);
-        itemRepository.save(item);
-
-        return "Item used successfully.";
+      
+        defaultInventory.addItem(inventoryId, item);
+        return true;
     }
 }
+

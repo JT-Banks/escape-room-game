@@ -2,6 +2,7 @@ package com.veero.escaperoomgame.core.model;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
+import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,25 +10,34 @@ import java.util.Optional;
 
 public class DefaultInventory extends AbstractInventory {
 
-    private List<Item> items = new ArrayList<>();
-
-    @Override
-    public void addItem(Item item) {
-        super.addItem(item);
+    public DefaultInventory(InventoryRepository inventoryRepository) {
+        super(inventoryRepository);
     }
 
     @Override
-    public Optional<Item> getItem(String itemId) {
-        return items.stream().filter(item -> item.getId().equals(itemId)).findFirst();
-    }
+    public void useItem(String inventoryId, String itemId) {
+        Inventory inventory = (Inventory) inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory not found with ID: " + inventoryId));
 
-    public void useItem(String itemId) {
-        // Implement the useItem method
+        Optional<Item> itemOptional = inventory.getItems().stream()
+                .filter(item -> item.getId().equals(itemId))
+                .findFirst();
+
+        if (itemOptional.isEmpty()) {
+            throw new IllegalArgumentException("Item not found in inventory");
+        }
+
+        Item item = itemOptional.get();
+        // Logic to "use" the item, e.g., apply its effects, remove it, etc.
+        inventory.removeItem(itemId);
+        inventoryRepository.save((com.veero.escaperoomgame.core.dto.Inventory) inventory);
+
     }
 
     @Override
-    public InventoryResponse getEntireInventory(String playerId) {
-        // Implement the getEntireInventory method
-        return null;
+    public InventoryResponse getEntireInventory(String inventoryId) {
+        Inventory inventory = (Inventory) inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory not found with ID: " + inventoryId));
+        return new InventoryResponse(inventory.getPlayerId(), true, "Inventory fetched successfully", inventory.getItems());
     }
 }

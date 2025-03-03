@@ -23,7 +23,7 @@ public class InventoryResponse {
     private String message;
 
     @Setter
-    private Map<String, Item> items;
+    private List<Item> items;
 
     public InventoryResponse(@NonNull String playerId, boolean success, String message) {
         this.playerId = playerId;
@@ -31,4 +31,10 @@ public class InventoryResponse {
         this.message = message;
     }
 
+    public InventoryResponse(@NonNull String playerId, boolean b, String inventoryFetchedSuccessfully, List<Item> items) {
+        this.playerId = playerId;
+        this.success = b;
+        this.message = inventoryFetchedSuccessfully;
+        this.items = items;
+    }
 }

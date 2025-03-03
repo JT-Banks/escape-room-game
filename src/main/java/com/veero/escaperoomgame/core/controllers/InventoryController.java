@@ -39,4 +39,10 @@ public class InventoryController {
             return ResponseEntity.internalServerError().body(new InventoryResponse(playerId, false, "An unexpected error occurred."));
         }
     }
+
+    @GetMapping("/getEntireInventory/{playerId}")
+    public ResponseEntity<InventoryResponse> getEntireInventory(@PathVariable String playerId) {
+        InventoryResponse inventory = inventoryService.getEntireInventory(playerId);
+        return ResponseEntity.ok(inventory);
+    }
 }

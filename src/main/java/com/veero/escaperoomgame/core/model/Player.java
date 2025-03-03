@@ -1,6 +1,5 @@
 package com.veero.escaperoomgame.core.model;
 
-import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.asylum.model.Action;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -24,7 +23,7 @@ public class Player implements Serializable {
     private PlayerStatus status;
     private String currentRoomId;
     private String interactionId;
-    private Inventory inventory;
+    private String inventoryId;
     private List<Action> actions;
     private double timeRemaining;
     private int score;
@@ -35,12 +34,7 @@ public class Player implements Serializable {
         LOST
     }
 
-    public void addItem(Item item) {
-        if (this.inventory != null) {
-            this.inventory.addItem(String.valueOf(item));
-        } else {
-            this.inventory = new InventoryImpl();
-            this.inventory.addItem(String.valueOf(item));
-        }
+    public void linkInventory(String inventoryId) {
+        this.inventoryId = inventoryId;
     }
 }
