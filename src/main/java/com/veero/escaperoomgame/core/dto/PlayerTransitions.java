@@ -1,6 +1,6 @@
 package com.veero.escaperoomgame.core.dto;
 
-import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
+import com.veero.escaperoomgame.asylum.repositories.PlayerRepository;
 import com.veero.escaperoomgame.core.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 

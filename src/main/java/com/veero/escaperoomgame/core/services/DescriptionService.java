@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core.service;
+package com.veero.escaperoomgame.core.services;
 
 import com.veero.escaperoomgame.asylum.model.GameObject;
 import com.veero.escaperoomgame.asylum.model.Room;

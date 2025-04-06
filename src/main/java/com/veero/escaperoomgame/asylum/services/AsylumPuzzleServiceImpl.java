@@ -1,6 +1,6 @@
-package com.veero.escaperoomgame.asylum.service;
+package com.veero.escaperoomgame.asylum.services;
 
-import com.veero.escaperoomgame.core.service.PuzzleService;
+import com.veero.escaperoomgame.core.services.PuzzleService;
 import org.springframework.stereotype.Service;
 
 @Service

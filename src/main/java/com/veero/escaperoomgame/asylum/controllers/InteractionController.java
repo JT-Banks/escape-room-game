@@ -1,7 +1,7 @@
 package com.veero.escaperoomgame.asylum.controllers;
 
 import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
-import com.veero.escaperoomgame.asylum.service.InteractionService;
+import com.veero.escaperoomgame.asylum.services.InteractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,8 @@
-package com.veero.escaperoomgame.core.service;
+package com.veero.escaperoomgame.core.services;
 
 import com.veero.escaperoomgame.asylum.model.Action;
 import com.veero.escaperoomgame.asylum.model.GameObject;
-import com.veero.escaperoomgame.asylum.repository.GameObjectRepository;
+import com.veero.escaperoomgame.asylum.repositories.GameObjectRepository;
 import com.veero.escaperoomgame.core.dto.ActionResponse;
 import com.veero.escaperoomgame.core.dto.GameObjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;

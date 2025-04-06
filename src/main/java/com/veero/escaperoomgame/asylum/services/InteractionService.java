@@ -1,18 +1,10 @@
-package com.veero.escaperoomgame.asylum.service;
+package com.veero.escaperoomgame.asylum.services;
 
 import com.veero.escaperoomgame.asylum.dto.InteractionResponse;
 import com.veero.escaperoomgame.asylum.model.GameObject;
-import com.veero.escaperoomgame.asylum.model.Room;
-import com.veero.escaperoomgame.asylum.repository.GameObjectRepository;
-import com.veero.escaperoomgame.asylum.repository.RoomRepository;
-import com.veero.escaperoomgame.core.service.DescriptionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.veero.escaperoomgame.asylum.repositories.GameObjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class InteractionService {

@@ -1,7 +1,8 @@
 package com.veero.escaperoomgame.core.controllers;
 
+import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
-import com.veero.escaperoomgame.core.service.InventoryService;
+import com.veero.escaperoomgame.core.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,9 @@ public class InventoryController {
     }
 
     @PostMapping("/{playerId}/addItem/{itemId}")
-    public ResponseEntity<InventoryResponse> addItem(@PathVariable String playerId, @PathVariable String itemId) {
+    public ResponseEntity<InventoryResponse> addItem(@PathVariable String playerId, @PathVariable Item item) {
         try {
-            boolean success = inventoryService.addItemToInventory(playerId, itemId);
+            boolean success = inventoryService.addItemToInventory(playerId, item);
             if (success) {
                 return ResponseEntity.ok(new InventoryResponse(playerId, true, "Item added successfully."));
             } else {

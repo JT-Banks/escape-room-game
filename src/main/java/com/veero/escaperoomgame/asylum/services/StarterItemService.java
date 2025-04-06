@@ -1,7 +1,7 @@
-package com.veero.escaperoomgame.asylum.service;
+package com.veero.escaperoomgame.asylum.services;
 
 import com.veero.escaperoomgame.asylum.model.Item;
-import com.veero.escaperoomgame.asylum.repository.ItemRepository;
+import com.veero.escaperoomgame.asylum.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

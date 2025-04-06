@@ -1,11 +1,10 @@
-package com.veero.escaperoomgame.asylum.service;
+package com.veero.escaperoomgame.asylum.services;
 
 import com.veero.escaperoomgame.asylum.model.Action;
 import com.veero.escaperoomgame.asylum.model.InteractionType;
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
-import com.veero.escaperoomgame.core.model.InventoryImpl;
 import com.veero.escaperoomgame.core.model.Player;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.veero.escaperoomgame.core.controllers;
 import com.veero.escaperoomgame.core.dto.ActionRequest;
 import com.veero.escaperoomgame.core.dto.ActionResponse;
 import com.veero.escaperoomgame.core.dto.GameObjectResponse;
-import com.veero.escaperoomgame.core.service.ActionService;
+import com.veero.escaperoomgame.core.services.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

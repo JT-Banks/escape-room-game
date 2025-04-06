@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.asylum.repository;
+package com.veero.escaperoomgame.asylum.repositories;
 
 import com.veero.escaperoomgame.core.model.Player;
 import org.springframework.data.mongodb.repository.MongoRepository;

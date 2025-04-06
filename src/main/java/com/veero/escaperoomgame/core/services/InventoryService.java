@@ -1,18 +1,13 @@
-package com.veero.escaperoomgame.core.service;
+package com.veero.escaperoomgame.core.services;
 
 import com.veero.escaperoomgame.asylum.model.Item;
-import com.veero.escaperoomgame.asylum.repository.ItemRepository;
-import com.veero.escaperoomgame.asylum.repository.PlayerRepository;
-import com.veero.escaperoomgame.core.dto.Inventory;
+import com.veero.escaperoomgame.asylum.repositories.PlayerRepository;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
-import com.veero.escaperoomgame.core.model.AbstractInventory;
 import com.veero.escaperoomgame.core.model.DefaultInventory;
 import com.veero.escaperoomgame.core.model.Player;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class InventoryService {
@@ -46,8 +41,19 @@ public class InventoryService {
         if (inventoryId == null) {
             throw new IllegalArgumentException("No inventory linked to player with ID: " + playerId);
         }
-      
         defaultInventory.addItem(inventoryId, item);
+        return true;
+    }
+
+    public boolean removeItemFromInventory(String playerId, String itemId) {
+        Player player = playerRepository.findById(playerId)
+                .orElseThrow(() -> new IllegalArgumentException("Player not found with ID: " + playerId));
+
+        String inventoryId = player.getInventoryId();
+        if (inventoryId == null) {
+            throw new IllegalArgumentException("No inventory linked to player with ID: " + playerId);
+        }
+        defaultInventory.removeItem(inventoryId, itemId);
         return true;
     }
 }
