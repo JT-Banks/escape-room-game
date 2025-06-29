@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core;
+package com.veero.escaperoomgame.core.constants;
 
 public class Constants {
     public static final String DOOR = "door";

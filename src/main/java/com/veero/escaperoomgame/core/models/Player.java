@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core.model;
+package com.veero.escaperoomgame.core.models;
 
 import com.veero.escaperoomgame.asylum.model.Action;
 import lombok.Data;

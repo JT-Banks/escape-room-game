@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core.model;
+package com.veero.escaperoomgame.core.models;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.veero.escaperoomgame.core.Constants.INVENTORY_CANNOT_BE_EMPTY;
-import static com.veero.escaperoomgame.core.Constants.PLAYER_CREATED;
+import static com.veero.escaperoomgame.core.constants.Constants.INVENTORY_CANNOT_BE_EMPTY;
+import static com.veero.escaperoomgame.core.constants.Constants.PLAYER_CREATED;
 
 public class InventoryImpl implements Inventory, Serializable {
     @Serial

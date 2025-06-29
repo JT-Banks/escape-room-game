@@ -1,11 +1,9 @@
-package com.veero.escaperoomgame.core.model;
+package com.veero.escaperoomgame.core.models;
 
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.InventoryResponse;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class DefaultInventory extends AbstractInventory {

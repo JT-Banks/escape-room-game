@@ -3,7 +3,7 @@ package com.veero.escaperoomgame.core.controllers;
 import com.veero.escaperoomgame.asylum.repositories.PlayerRepository;
 import com.veero.escaperoomgame.asylum.services.PlayerService;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
-import com.veero.escaperoomgame.core.model.Player;
+import com.veero.escaperoomgame.core.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;

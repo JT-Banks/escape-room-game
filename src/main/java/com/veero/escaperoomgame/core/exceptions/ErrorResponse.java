@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core.exception;
+package com.veero.escaperoomgame.core.exceptions;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

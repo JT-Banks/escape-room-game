@@ -5,7 +5,7 @@ import com.veero.escaperoomgame.asylum.model.InteractionType;
 import com.veero.escaperoomgame.asylum.model.Item;
 import com.veero.escaperoomgame.core.dto.Inventory;
 import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
-import com.veero.escaperoomgame.core.model.Player;
+import com.veero.escaperoomgame.core.models.Player;
 import com.veero.escaperoomgame.core.repositories.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

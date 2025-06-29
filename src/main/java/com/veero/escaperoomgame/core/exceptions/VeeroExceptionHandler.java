@@ -1,4 +1,4 @@
-package com.veero.escaperoomgame.core.exception;
+package com.veero.escaperoomgame.core.exceptions;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
