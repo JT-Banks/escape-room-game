@@ -3,49 +3,116 @@ info:
   title: Escape Room Game API
   description: API for interacting with the Escape Room Game.
   version: 1.0.0
-
 servers:
   - url: http://localhost:8080
-    description: Development server
-
+    description: Local development server
+tags:
+  - name: Rooms
+    description: Operations related to game rooms
+  - name: Items
+    description: Operations related to interactable items
+  - name: Inventory
+    description: Player inventory management
+  - name: Player
+    description: Player creation and management
+  - name: Interactions
+    description: Room and object interaction endpoints
 paths:
-  /rooms:
+  /room/{roomId}:
     get:
-      summary: Retrieves a list of all available rooms in the game.
-      responses:
-        '200':
-          description: Successfully retrieved the list of rooms.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Room'
-
-  /rooms/{roomId}:
-    get:
-      summary: Fetches details of a specific room.
+      tags:
+        - Rooms
+      summary: Get a specific room
+      operationId: getRoomAlt
       parameters:
         - name: roomId
           in: path
           required: true
           schema:
             type: string
+          description: ID of the room to retrieve
       responses:
         '200':
-          description: Successfully retrieved room details.
+          description: Room found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Room'
         '404':
-          description: Room with the specified ID does not exist.
-
-  /rooms/{roomId}/items/{itemId}:
-    post:
-      summary: Manages interactions with a specific item in a room.
+          description: Room not found
+  /all/rooms:
+    get:
+      tags:
+        - Rooms
+      summary: Get all rooms (alternate)
+      operationId: getAllRoomsAlt
+      responses:
+        '200':
+          description: All rooms retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+  /inventory/getEntireInventory/{playerId}:
+    get:
+      tags:
+        - Inventory
+      summary: Get full inventory for a player
+      operationId: getInventory
       parameters:
-        - name: roomId
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Player ID
+      responses:
+        '200':
+          description: Inventory retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /inventory/add:
+    post:
+      tags:
+        - Inventory
+      summary: Add item to inventory
+      operationId: addItemToInventory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                playerName:
+                  type: string
+                playerId:
+                  type: string
+                itemId:
+                  type: string
+                itemName:
+                  type: string
+      responses:
+        '200':
+          description: Item added to inventory
+          content:
+            application/json:
+              schema:
+                type: object
+  /inventory/{playerId}/{itemId}:
+    post:
+      tags:
+        - Inventory
+      summary: Use or inspect an item
+      operationId: useItem
+      parameters:
+        - name: playerId
           in: path
           required: true
           schema:
@@ -60,22 +127,125 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                action:
-                  type: string
+              $ref: '#/components/schemas/ActionRequest'
       responses:
         '200':
-          description: Interaction was successful, item state updated.
+          description: Item used or inspected
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Item'
-        '400':
-          description: Invalid request parameters or body.
-        '404':
-          description: Room or item with specified IDs does not exist.
-
+                type: object
+  /player/create:
+    post:
+      tags:
+        - Player
+      summary: Create a new player
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '201':
+          description: Player created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+  /player/get/{playerId}:
+    get:
+      tags:
+        - Player
+      summary: Get a specific player
+      operationId: getPlayerById
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique player ID
+      responses:
+        '200':
+          description: Player found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+  /interact/{objectName}:
+    get:
+      tags:
+        - Interactions
+      summary: Interact with an object by name
+      operationId: interactWithObject
+      parameters:
+        - name: objectName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Interaction successful
+          content:
+            application/json:
+              schema:
+                type: object
+  /action/{roomId}/{objectName}:
+    get:
+      tags:
+        - Interactions
+      summary: Get object state
+      operationId: getObjectState
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: objectName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Object state retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - Interactions
+      summary: Perform action on object
+      operationId: actOnObject
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: objectName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionRequest'
+      responses:
+        '200':
+          description: Action performed successfully
+          content:
+            application/json:
+              schema:
+                type: object
 components:
   schemas:
     Room:
@@ -83,13 +253,10 @@ components:
       properties:
         id:
           type: string
-          description: Unique identifier for the room.
         name:
           type: string
-          description: Name of the room.
         description:
           type: string
-          description: Description of the room.
         items:
           type: array
           items:
@@ -99,13 +266,45 @@ components:
       properties:
         id:
           type: string
-          description: Unique identifier for the item.
         type:
           type: string
-          description: Type of the item (e.g., 'drawer', 'letter').
         state:
           type: string
-          description: Current state of the item (e.g., 'closed', 'open').
         content:
           type: string
-          description: Content of the item, revealed upon interaction.
+    Player:
+      type: object
+      required:
+        - playerName
+        - background
+        - difficultyLevel
+        - specialAbility
+        - starterItem
+      properties:
+        playerName:
+          type: string
+        background:
+          type: string
+        difficultyLevel:
+          type: string
+          enum:
+            - Easy
+            - Medium
+            - Hard
+        specialAbility:
+          type: string
+        starterItem:
+          type: string
+    ActionRequest:
+      type: object
+      required:
+        - actionType
+      properties:
+        actionType:
+          type: string
+          enum:
+            - inspect
+            - use
+            - move
+            - open
+            - close

@@ -13,7 +13,7 @@ import java.util.List;
 public class RoomController {
 
    @Autowired
-   private RoomService roomService;
+   private final RoomService roomService;
 
     @Autowired
     public RoomController(RoomService roomService) {
