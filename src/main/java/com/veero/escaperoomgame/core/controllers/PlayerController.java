@@ -1,11 +1,11 @@
 package com.veero.escaperoomgame.core.controllers;
 
-import com.veero.escaperoomgame.asylum.repositories.PlayerRepository;
-import com.veero.escaperoomgame.asylum.services.PlayerService;
-import com.veero.escaperoomgame.core.dto.PlayerCreationResponse;
+import com.veero.escaperoomgame.core.repositories.PlayerRepository;
+import com.veero.escaperoomgame.core.services.PlayerService;
+import com.veero.escaperoomgame.generated.model.PlayerCreationResponse;
 import com.veero.escaperoomgame.core.models.Player;
+import com.veero.escaperoomgame.generated.model.PlayerCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,33 +13,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/player")
-@SuppressWarnings("unused")
+@RequestMapping("/api/players")
 public class PlayerController {
-    //TODO: Add all the logic for items
+
     private final PlayerRepository playerRepository;
     private final PlayerService playerService;
-    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public PlayerController(PlayerRepository playerRepository, PlayerService playerService, MongoTemplate mongoTemplate) {
+    public PlayerController(
+            PlayerRepository playerRepository,
+            PlayerService playerService
+    ) {
         this.playerRepository = playerRepository;
         this.playerService = playerService;
-        this.mongoTemplate = mongoTemplate;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<PlayerCreationResponse> createPlayer(@RequestBody Player newPlayerData) {
+    @PostMapping
+    public ResponseEntity<PlayerCreationResponse> createPlayer(@RequestBody PlayerCreateRequest newPlayerData) {
         Player newPlayer = playerService.createNewPlayer(newPlayerData);
+        playerRepository.save(newPlayer);
         PlayerCreationResponse response = playerService.createPlayerResponse(newPlayer);
-        mongoTemplate.save(newPlayer, "player");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{playerId}")
+    @GetMapping("/{playerId}")
     public ResponseEntity<Player> getPlayer(@PathVariable String playerId) {
         Player player = playerRepository.findByPlayerId(playerId).orElseThrow(()
                 -> new RuntimeException("Player not found"));

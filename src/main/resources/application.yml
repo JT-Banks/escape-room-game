@@ -1,4 +1,17 @@
 spring:
+  profiles:
+    active: local
   data:
     mongodb:
-      uri: mongodb+srv://admin:UsCzONsHkRWBtxT3@cluster0.xn2u0pi.mongodb.net/Game
+      uri: ${MONGODB_URI:mongodb://localhost:27017/Game}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+

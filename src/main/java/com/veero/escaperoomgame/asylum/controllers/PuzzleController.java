@@ -1,30 +1,32 @@
 package com.veero.escaperoomgame.asylum.controllers;
 
-import com.veero.escaperoomgame.asylum.dto.PuzzleResponse;
 import com.veero.escaperoomgame.asylum.services.AsylumPuzzleServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.veero.escaperoomgame.generated.model.PuzzleResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@SuppressWarnings("unused")
+@RequestMapping("/api/rooms/{roomId}/puzzles")
 public class PuzzleController {
 
-    @Autowired
-    private AsylumPuzzleServiceImpl asylumPuzzleServiceImpl;
+    private final AsylumPuzzleServiceImpl puzzleService;
 
-    @Autowired
-    private PuzzleResponse response;
+    public PuzzleController(AsylumPuzzleServiceImpl puzzleService) {
+        this.puzzleService = puzzleService;
+    }
 
-    @GetMapping("/solve/{puzzleId}")
-    public ResponseEntity<?> solve(@PathVariable String puzzleId,
-                                   @RequestParam String roomId,
-                                   @RequestParam String solution) {
-        boolean isSolved = asylumPuzzleServiceImpl.solvePuzzle(roomId, puzzleId, solution);
-        response.checkIfSolved(isSolved);
+    @PostMapping("/{puzzleId}/solve")
+    public ResponseEntity<PuzzleResponse> solve(
+            @PathVariable String roomId,
+            @PathVariable String puzzleId,
+            @RequestParam String solution) {
+        boolean isSolved = puzzleService.solvePuzzle(roomId, puzzleId, solution);
+
+        PuzzleResponse response = new PuzzleResponse();
+        response.setSolved(isSolved);
+        response.setSuccess(isSolved);
+        response.setMessage(isSolved ? "Puzzle solved successfully!" : "Incorrect solution. Try again.");
+
         return ResponseEntity.ok(response);
     }
 }

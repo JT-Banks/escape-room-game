@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://username:password@cluster0.xn2u0pi.mongodb.net/Game?authMechanism=DEFAULT&readPreference=primary
+
+# Instructions:
+# 1. Copy this file to 'application-local.yml' (already in .gitignore)
+# 2. Replace 'username' and 'password' with your actual MongoDB Atlas credentials
+# 3. Never commit application-local.yml to git - it contains secrets!
+

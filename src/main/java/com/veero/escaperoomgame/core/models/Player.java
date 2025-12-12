@@ -3,13 +3,16 @@ package com.veero.escaperoomgame.core.models;
 import com.veero.escaperoomgame.asylum.model.Action;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
-//TODO: MOVE ALL SERIALIZABLE CLASSES TO OPENAPI GENERATION!!!!!!!!!!!!
 @Data
+@Document(collection = "player")
 public class Player implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -27,6 +30,9 @@ public class Player implements Serializable {
     private List<Action> actions;
     private double timeRemaining;
     private int score;
+    @CreatedDate
+    private LocalDateTime createdAt;
+
     public enum PlayerStatus {
         PLAYING,
         PAUSED,
