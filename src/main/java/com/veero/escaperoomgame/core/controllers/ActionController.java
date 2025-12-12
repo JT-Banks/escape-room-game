@@ -1,15 +1,15 @@
 package com.veero.escaperoomgame.core.controllers;
 
-import com.veero.escaperoomgame.core.dto.ActionRequest;
-import com.veero.escaperoomgame.core.dto.ActionResponse;
-import com.veero.escaperoomgame.core.dto.GameObjectResponse;
-import com.veero.escaperoomgame.core.service.ActionService;
+import com.veero.escaperoomgame.generated.model.ActionRequest;
+import com.veero.escaperoomgame.generated.model.ActionResponse;
+import com.veero.escaperoomgame.generated.model.GameObjectResponse;
+import com.veero.escaperoomgame.core.services.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/action")
+@RequestMapping("/api/rooms/{roomId}/objects/{objectId}/actions")
 public class ActionController {
 
     private final ActionService actionService;
@@ -19,22 +19,22 @@ public class ActionController {
         this.actionService = actionService;
     }
 
-    @PostMapping("/{roomId}/{interactionId}")
+    @PostMapping
     public ResponseEntity<ActionResponse> performAction(
             @PathVariable String roomId,
-            @PathVariable String interactionId,
+            @PathVariable String objectId,
             @RequestBody ActionRequest request
     ) {
-        ActionResponse response = actionService.performAction(roomId, interactionId, request.getActionType());
+        ActionResponse response = actionService.performAction(roomId, objectId, request.getActionType().getValue());
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{roomId}/{interactionId}")
+    @GetMapping
     public ResponseEntity<GameObjectResponse> getObjectDetails(
             @PathVariable String roomId,
-            @PathVariable String interactionId
+            @PathVariable String objectId
     ) {
-        GameObjectResponse response = actionService.getObjectDetails(roomId, interactionId);
+        GameObjectResponse response = actionService.getObjectDetails(roomId, objectId);
         return ResponseEntity.ok(response);
     }
 }

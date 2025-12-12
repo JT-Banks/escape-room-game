@@ -3,18 +3,32 @@ info:
   title: Escape Room Game API
   description: API for interacting with the Escape Room Game.
   version: 1.0.0
-
 servers:
-  - url: http://localhost:8080
-    description: Development server
-
+  - url: http://localhost:8080/api
+    description: Local development server
+tags:
+  - name: Rooms
+    description: Operations related to game rooms
+  - name: Players
+    description: Player creation and management
+  - name: Inventory
+    description: Player inventory management
+  - name: Puzzles
+    description: Puzzle solving operations
+  - name: Interactions
+    description: Room and object interaction endpoints
+  - name: Actions
+    description: Object action operations
 paths:
   /rooms:
     get:
-      summary: Retrieves a list of all available rooms in the game.
+      tags:
+        - Rooms
+      summary: Get all rooms
+      operationId: getAllRooms
       responses:
         '200':
-          description: Successfully retrieved the list of rooms.
+          description: All rooms retrieved
           content:
             application/json:
               schema:
@@ -24,7 +38,10 @@ paths:
 
   /rooms/{roomId}:
     get:
-      summary: Fetches details of a specific room.
+      tags:
+        - Rooms
+      summary: Get a specific room
+      operationId: getRoom
       parameters:
         - name: roomId
           in: path
@@ -33,24 +50,83 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved room details.
+          description: Room found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Room'
         '404':
-          description: Room with the specified ID does not exist.
+          description: Room not found
 
-  /rooms/{roomId}/items/{itemId}:
+  /rooms/{roomId}/puzzles/{puzzleId}/solve:
     post:
-      summary: Manages interactions with a specific item in a room.
+      tags:
+        - Puzzles
+      summary: Solve a puzzle
+      operationId: solvePuzzle
       parameters:
         - name: roomId
           in: path
           required: true
           schema:
             type: string
-        - name: itemId
+        - name: puzzleId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: solution
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Puzzle solution processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  solved:
+                    type: boolean
+
+  /rooms/{roomId}/objects/{objectId}/actions:
+    get:
+      tags:
+        - Actions
+      summary: Get object details
+      operationId: getObjectDetails
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: objectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Object details retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameObjectResponse'
+    post:
+      tags:
+        - Actions
+      summary: Perform action on object
+      operationId: performAction
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: objectId
           in: path
           required: true
           schema:
@@ -60,21 +136,150 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                action:
-                  type: string
+              $ref: '#/components/schemas/ActionRequest'
       responses:
         '200':
-          description: Interaction was successful, item state updated.
+          description: Action performed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Item'
-        '400':
-          description: Invalid request parameters or body.
+                $ref: '#/components/schemas/ActionResponse'
+
+  /players:
+    post:
+      tags:
+        - Players
+      summary: Create a new player
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerCreateRequest'
+      responses:
+        '201':
+          description: Player created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerCreationResponse'
+
+  /players/{playerId}:
+    get:
+      tags:
+        - Players
+      summary: Get player by ID
+      operationId: getPlayer
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
         '404':
-          description: Room or item with specified IDs does not exist.
+          description: Player not found
+
+  /players/{playerId}/inventory:
+    get:
+      tags:
+        - Inventory
+      summary: Get player inventory
+      operationId: getPlayerInventory
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Inventory retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+
+  /players/{playerId}/inventory/items:
+    post:
+      tags:
+        - Inventory
+      summary: Add item to player inventory
+      operationId: addItemToPlayerInventory
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Item added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+
+  /players/{playerId}/inventory/items/{itemId}:
+    delete:
+      tags:
+        - Inventory
+      summary: Remove or use item from inventory
+      operationId: removeItemFromInventory
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Item removed/used successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+        '404':
+          description: Item not found in inventory
+
+
+  /interactions/{interactionId}:
+    get:
+      tags:
+        - Interactions
+      summary: Interact with object
+      operationId: interact
+      parameters:
+        - name: interactionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Interaction processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InteractionResponse'
 
 components:
   schemas:
@@ -83,29 +288,264 @@ components:
       properties:
         id:
           type: string
-          description: Unique identifier for the room.
         name:
           type: string
-          description: Name of the room.
         description:
           type: string
-          description: Description of the room.
+        isLocked:
+          type: boolean
         items:
           type: array
           items:
             $ref: '#/components/schemas/Item'
+        puzzles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Puzzle'
+        hints:
+          type: array
+          items:
+            type: string
+
     Item:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for the item.
+        itemId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
         type:
           type: string
-          description: Type of the item (e.g., 'drawer', 'letter').
-        state:
+        use:
           type: string
-          description: Current state of the item (e.g., 'closed', 'open').
-        content:
+        notes:
+          type: object
+          additionalProperties:
+            type: string
+
+    Puzzle:
+      type: object
+      properties:
+        id:
           type: string
-          description: Content of the item, revealed upon interaction.
+        name:
+          type: string
+        description:
+          type: string
+        solution:
+          type: string
+        clues:
+          type: array
+          items:
+            type: string
+
+    PuzzleResponse:
+      type: object
+      properties:
+        solved:
+          type: boolean
+        message:
+          type: string
+        success:
+          type: boolean
+
+    Player:
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        background:
+          type: string
+        difficultyLevel:
+          type: string
+          enum:
+            - Easy
+            - Medium
+            - Hard
+        specialAbility:
+          type: string
+        starterItem:
+          type: string
+        status:
+          type: string
+          enum:
+            - PLAYING
+            - PAUSED
+            - WON
+            - LOST
+        currentRoomId:
+          type: string
+        interactionId:
+          type: string
+        inventoryId:
+          type: string
+        timeRemaining:
+          type: number
+          format: double
+        score:
+          type: integer
+
+    PlayerCreateRequest:
+      type: object
+      required:
+        - playerName
+        - background
+        - difficultyLevel
+        - specialAbility
+        - starterItem
+      properties:
+        playerName:
+          type: string
+        background:
+          type: string
+        difficultyLevel:
+          type: string
+          enum:
+            - Easy
+            - Medium
+            - Hard
+        specialAbility:
+          type: string
+        starterItem:
+          type: string
+
+    PlayerCreationResponse:
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        background:
+          type: string
+        difficulty:
+          type: string
+        specialAbility:
+          type: string
+        starterItem:
+          type: string
+        inventory:
+          $ref: '#/components/schemas/InventoryDto'
+        success:
+          type: boolean
+
+    ActionRequest:
+      type: object
+      required:
+        - actionType
+      properties:
+        actionType:
+          type: string
+          enum:
+            - inspect
+            - use
+            - move
+            - open
+            - close
+
+    ActionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        result:
+          type: string
+
+    GameObjectResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        roomId:
+          type: string
+        interactionId:
+          type: string
+        description:
+          type: string
+
+    InteractionRequest:
+      type: object
+      properties:
+        objectId:
+          type: string
+        interactionType:
+          type: string
+          enum:
+            - inspect
+            - interact
+            - pick_up
+            - open
+        name:
+          type: string
+        description:
+          type: string
+
+    InteractionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        clues:
+          type: array
+          items:
+            type: string
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
+        relatedObjects:
+          type: array
+          items:
+            type: string
+
+    Action:
+      type: object
+      properties:
+        actionType:
+          type: string
+        result:
+          type: string
+
+    InventoryRequest:
+      type: object
+      properties:
+        playerId:
+          type: string
+        itemId:
+          type: string
+        itemName:
+          type: string
+
+    InventoryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        playerId:
+          type: string
+        message:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+
+    InventoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+        playerId:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'

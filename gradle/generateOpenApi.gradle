@@ -1,0 +1,31 @@
+
+openApiGenerate {
+    generatorName = 'spring'
+    inputSpec = "$projectDir/src/main/resources/specifications.yml"
+    outputDir = layout.buildDirectory.dir("generated/openapi").get().asFile.absolutePath
+    modelPackage = 'com.veero.escaperoomgame.generated.model'
+    apiPackage = 'com.veero.escaperoomgame.generated.api'
+    groupId = 'com.veero'
+    configOptions = [
+            dateLibrary: "java8",
+            interfaceOnly: "true",
+            skipDefaultInterface: "true",
+            useTags: "true",
+            useBeanValidation: "false",
+            performBeanValidation: "false",
+            useJakartaEe: "true"
+    ]
+}
+
+// Configure source sets to include generated code
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/openapi/src/main/java"
+        }
+    }
+}
+
+// Ensure OpenAPI generation runs before Java compilation
+compileJava.dependsOn 'openApiGenerate'
+
