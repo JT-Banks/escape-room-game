@@ -3,14 +3,35 @@ plugins {
 	id 'org.springframework.boot' version '3.2.0'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'org.openapi.generator' version '7.1.0'
-	id 'io.freefair.lombok' version '8.4'
+	id 'io.freefair.lombok' version '8.11'
 }
 
-group = 'com.veero'
+ext {
+	javaVersion = '17'
+	gradleVersion = '8.14'
+	springBootVersion = '3.2.0'
+	springDependencyManagementVersion = '1.1.4'
+	openApiGeneratorVersion = '7.1.0'
+	lombokVersion = '8.11'
+	lombokLibVersion = '1.18.36'
+	swaggerAnnotationsVersion = '2.2.8'
+	jacksonDatabindNullableVersion = '0.2.6'
+	jakartaAnnotationVersion = '2.1.1'
+	jakartaValidationVersion = '3.0.2'
+	dotenvVersion = '3.0.0'
+	springdocOpenApiVersion = '2.3.0'
+	commonsLang3Version = '3.17.0'
+}
+
+group = 'com.thefinaldoor'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -25,21 +46,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.projectlombok:lombok'
-	implementation 'io.swagger.core.v3:swagger-annotations:2.2.8'
-	implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
-	implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
-	implementation 'io.github.cdimascio:dotenv-java:3.0.0'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
-	annotationProcessor 'org.projectlombok:lombok:1.18.28'
+	implementation "org.projectlombok:lombok:$lombokLibVersion"
+	implementation "io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion"
+	implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+	implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+	implementation "jakarta.validation:jakarta.validation-api:$jakartaValidationVersion"
+	implementation "io.github.cdimascio:dotenv-java:$dotenvVersion"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenApiVersion"
+	implementation "org.apache.commons:commons-lang3:$commonsLang3Version"
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+apply from: 'gradle/testConfigs.gradle'
 

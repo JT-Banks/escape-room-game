@@ -1,7 +1,9 @@
-# Escape Room Game - AI Assistant Instructions
+# The Final Door - AI Assistant Instructions
 
 ## Project Overview
-This is a **backend Spring Boot application** for an interactive web-based escape room game. The frontend is served by a separate **JavaScript React** application that communicates with this backend via REST APIs.
+This is a **backend Spring Boot application** for **The Final Door**, a multi-themed escape room game platform. The frontend is served by a separate **JavaScript React** application that communicates with this backend via REST APIs.
+
+The platform hosts multiple themed escape room experiences including Asylum, Hospital, Jail, Tomb, and more, each with unique puzzles, narratives, and game mechanics.
 
 ## AI Assistant Guidelines
 
@@ -36,7 +38,7 @@ This is a **backend Spring Boot application** for an interactive web-based escap
 ### Package Organization
 The project follows a **layered architecture** with clear separation between **core** game logic and **theme-specific** implementations:
 
-#### Core Package (`com.veero.escaperoomgame.core`)
+#### Core Package (`com.thefinaldoor.core`)
 **Generic, reusable game components that work across ALL themes (asylum, jail, pyramid, etc.):**
 
 **What BELONGS in Core:**
@@ -76,13 +78,13 @@ The project follows a **layered architecture** with clear separation between **c
   - `ItemRepository` - Item retrieval (CORE)
   
 - **Exceptions**: Error handling (`core.exceptions`)
-  - `VeeroExceptionHandler` - Global exception handler
+  - `FinalDoorExceptionHandler` - Global exception handler
   - `ErrorResponse` - Standardized error response
   
 - **Constants**: Application-wide constants (`core.constants`)
   - `Constants` - Shared constants across all games
 
-#### Theme-Specific Package (`com.veero.escaperoomgame.asylum`)
+#### Theme-Specific Package (`com.thefinaldoor.asylum`)
 **Asylum-themed escape room implementation - ONLY asylum-specific logic:**
 
 **What BELONGS in Theme Packages (asylum, jail, pyramid, etc.):**
@@ -124,7 +126,7 @@ The project follows a **layered architecture** with clear separation between **c
   - `AsylumConstants` - Asylum-specific constants
 
 ### Adding a New Theme (jail, pyramid, etc.)
-When adding a new theme, create package: `com.veero.escaperoomgame.<theme-name>`
+When adding a new theme, create package: `com.thefinaldoor.<theme-name>`
 
 1. **Reuse Core Components:**
    - Use `core.models.Player` (don't create theme-specific player)
@@ -200,7 +202,7 @@ echo 'MONGODB_URI=mongodb+srv://user:pass@cluster.net/Game' > .env
 ### MongoDB Collections
 
 #### `rooms` Collection
-Maps to: `com.veero.escaperoomgame.asylum.model.Room`
+Maps to: `com.thefinaldoor.asylum.model.Room`
 ```
 {
   id: String,
@@ -214,7 +216,7 @@ Maps to: `com.veero.escaperoomgame.asylum.model.Room`
 ```
 
 #### `game objects` Collection
-Maps to: `com.veero.escaperoomgame.asylum.model.GameObject`
+Maps to: `com.thefinaldoor.asylum.model.GameObject`
 ```
 {
   id: String,
@@ -230,7 +232,7 @@ Maps to: `com.veero.escaperoomgame.asylum.model.GameObject`
 ```
 
 #### `items` Collection
-Maps to: `com.veero.escaperoomgame.asylum.model.Item`
+Maps to: `com.thefinaldoor.asylum.model.Item`
 ```
 {
   id: String,
@@ -241,7 +243,7 @@ Maps to: `com.veero.escaperoomgame.asylum.model.Item`
 ```
 
 #### `inventory` Collection
-Maps to: `com.veero.escaperoomgame.core.dto.Inventory`
+Maps to: `com.thefinaldoor.core.dto.Inventory`
 ```
 {
   id: String,
@@ -395,10 +397,10 @@ Key schemas defined in specifications.yml:
 - Keep controllers thin, services fat
 - Use DTOs for API responses, not domain models directly
 - Validate input in controllers or services
-- Use exceptions for error handling (caught by `VeeroExceptionHandler`)
+- Use exceptions for error handling (caught by `FinalDoorExceptionHandler`)
 
 ### Testing
-- Test files location: `src/test/java/com/veero/`
+- Test files location: `src/test/java/com/thefinaldoor/`
 - Use Spring Boot Test framework
 - Test both service and controller layers
 - Mock repositories in service tests
@@ -519,7 +521,7 @@ The project supports multiple escape room themes:
 5. Use repository in service layer
 
 ### Adding a New Theme
-1. Create package: `com.veero.escaperoomgame.<theme-name>`
+1. Create package: `com.thefinaldoor.<theme-name>`
 2. Follow asylum structure:
    ```
    <theme-name>/

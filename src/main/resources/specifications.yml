@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Escape Room Game API
-  description: API for interacting with the Escape Room Game.
+  title: The Final Door API
+  description: API for The Final Door - A multi-themed escape room game platform.
   version: 1.0.0
 servers:
   - url: http://localhost:8080/api
