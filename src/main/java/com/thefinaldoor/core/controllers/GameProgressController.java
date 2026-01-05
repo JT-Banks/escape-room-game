@@ -24,6 +24,10 @@ public class GameProgressController {
 
     @PostMapping("/reset")
     public ResponseEntity<String> resetProgress(@PathVariable String playerId) {
+        Map<String, Object> progress = gameStateService.getPlayerProgress(playerId);
+        if (progress == null || progress.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         gameStateService.resetPlayerProgress(playerId);
         return ResponseEntity.ok("Player progress reset successfully");
     }
