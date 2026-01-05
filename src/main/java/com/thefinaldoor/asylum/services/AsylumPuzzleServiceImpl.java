@@ -25,11 +25,8 @@ public class AsylumPuzzleServiceImpl implements PuzzleService {
 
     @Override
     public boolean solvePuzzle(String roomId, String puzzleId, String solution) {
-        throw new UnsupportedOperationException(
-            "Use solvePuzzle(playerId, roomId, puzzleId, solution) for asylum puzzles"
-        );
+        return solvePuzzle(roomId, roomId, puzzleId, solution);
     }
-
     private boolean solveAnniesStoryPuzzle(String playerId) {
         Set<String> requiredClues = Set.of(
             "annies-letters",
