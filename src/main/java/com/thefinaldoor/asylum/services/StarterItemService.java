@@ -23,7 +23,8 @@ public class StarterItemService {
 
     private Item getDefaultStarterItem() {
         // Return a default item if the requested item is not found
-        return new Item("1", "1", "Flashlight",
-                "Tiny flashlight, sometimes flickers but a good smack will get it working again", "Default type", "Default use");
+        return new Item("flashlight", "Flashlight",
+                "Tiny flashlight, sometimes flickers but a good smack will get it working again",
+                "tool", "illuminate");
     }
 }

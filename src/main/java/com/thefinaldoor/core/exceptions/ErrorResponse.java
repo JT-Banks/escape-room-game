@@ -1,17 +1,26 @@
 package com.thefinaldoor.core.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
 
 @Data
-class ErrorResponse {
+public class ErrorResponse {
 
+    private int status;
+    private String error;
     private String message;
+    private String path;
 
-    private HttpStatus httpStatus;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timestamp;
 
-    public ErrorResponse(String message, HttpStatus httpStatus) {
+    public ErrorResponse(String message, int status, String error, String path) {
         this.message = message;
-        this.httpStatus = httpStatus;
+        this.status = status;
+        this.error = error;
+        this.path = path;
+        this.timestamp = LocalDateTime.now();
     }
 }

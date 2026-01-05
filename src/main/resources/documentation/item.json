@@ -1,55 +1,104 @@
 [{
-    "itemId": "1",
-    "name": "flashlight",
+    "_id": "flashlight",
+    "name": "Flashlight",
     "description": "A flashlight to help you see in the dark",
-    "type": "utility",
+    "type": "tool",
     "use": "illuminate"
 },
 
 {
-    "itemId": "2",
-    "name": "notepad & pen",
+    "_id": "notepad",
+    "name": "Notepad & Pen",
     "description": "A notepad to keep notes on what you deem important",
     "type": "utility",
-    "use": "record" 
+    "use": "record",
+    "notes": {}
 },
 
 {
-    "itemId": "3",
+    "_id": "janitor-key",
     "name": "Janitor Key",
-    "description": "A key that unlocks the janitor's closest",
+    "description": "A key that unlocks the janitor's closet",
     "type": "key",
-    "use": "unlock" 
+    "use": "unlock"
 },
 
 {
-    "itemId": "4",
-    "name": "Red fuse",
-    "description": "A fuse that is red",
-    "type": "utility",
-    "use": "insert" 
+    "_id": "red-fuse",
+    "name": "Red Fuse",
+    "description": "A fuse that is red, used in the electrical panel",
+    "type": "component",
+    "use": "insert"
 },
 
 {
-    "itemId": "5",
-    "name": "Blue fuse",
-    "description": "A fuse that is blue",
-    "type": "utility",
-    "use": "insert" 
+    "_id": "blue-fuse",
+    "name": "Blue Fuse",
+    "description": "A fuse that is blue, used in the electrical panel",
+    "type": "component",
+    "use": "insert"
 },
 
 {
-    "itemId": "6",
-    "name": "Green fuse",
-    "description": "A fuse that is green",
-    "type": "utility",
-    "use": "insert" 
+    "_id": "green-fuse",
+    "name": "Green Fuse",
+    "description": "A fuse that is green, used in the electrical panel",
+    "type": "component",
+    "use": "insert"
 },
 
 {
-    "itemId": "7",
-    "name": "Purple fuse",
-    "description": "A fuse that is purple",
-    "type": "utility",
-    "use": "insert" 
+    "_id": "purple-fuse",
+    "name": "Purple Fuse",
+    "description": "A fuse that is purple, used in the electrical panel",
+    "type": "component",
+    "use": "insert"
+},
+
+{
+    "_id": "teddy-bear",
+    "name": "Teddy Bear",
+    "description": "A small, worn teddy bear with a missing eye",
+    "type": "clue",
+    "use": "inspect"
+},
+
+{
+    "_id": "old-letters",
+    "name": "Old Letters",
+    "description": "A stack of old, yellowed letters tied with a ribbon",
+    "type": "clue",
+    "use": "read"
+},
+
+{
+    "_id": "cell-key",
+    "name": "Cell Key",
+    "description": "An old key with intricate designs, its purpose unknown",
+    "type": "key",
+    "use": "unlock"
+},
+
+{
+    "_id": "annies-letters",
+    "name": "Annie's Letters",
+    "description": "A collection of letters written by Annie to her family, revealing her tragic story with Scratcher",
+    "type": "clue",
+    "use": "read"
+},
+
+{
+    "_id": "burnt-drawing",
+    "name": "Burnt Drawing",
+    "description": "A child's drawing showing a teddy bear with red eyes and sharp teeth, labeled 'My friend Scratcher'",
+    "type": "clue",
+    "use": "inspect"
+},
+
+{
+    "_id": "screwdriver",
+    "name": "Screwdriver",
+    "description": "A rusty screwdriver found in the janitor's jacket pocket, useful for removing screws",
+    "type": "tool",
+    "use": "unscrew"
 }]

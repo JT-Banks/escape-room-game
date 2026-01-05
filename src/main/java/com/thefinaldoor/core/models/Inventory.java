@@ -16,8 +16,8 @@ public class Inventory implements Serializable {
     private String playerId;
     private List<Item> items = new ArrayList<>();
 
-    public void addItem(String id, String itemId, String name, String description, String type, String use) {
-        Item item = new Item(id, itemId, name, description, type, use);
+    public void addItem(String id, String name, String description, String type, String use) {
+        Item item = new Item(id, name, description, type, use);
         this.items.add(item);
     }
 
@@ -26,7 +26,20 @@ public class Inventory implements Serializable {
     }
 
     public boolean removeItem(String itemId) {
-        return this.items.removeIf(item -> item.getItemId().equals(itemId));
+        return this.items.removeIf(item -> item.getId().equals(itemId));
+    }
+
+    public String removeItemAndGetName(String itemId) {
+        Item itemToRemove = this.items.stream()
+                .filter(item -> item.getId().equals(itemId))
+                .findFirst()
+                .orElse(null);
+
+        if (itemToRemove != null) {
+            this.items.remove(itemToRemove);
+            return itemToRemove.getName();
+        }
+        return null;
     }
 
     public List<Item> getAllItems() {

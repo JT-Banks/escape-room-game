@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/rooms/{roomId}/objects/{objectId}/actions")
+@RequestMapping("/api/players/{playerId}/rooms/{roomId}/objects/{objectId}/actions")
 public class ActionController {
 
     private final ActionService actionService;
@@ -21,11 +21,17 @@ public class ActionController {
 
     @PostMapping
     public ResponseEntity<ActionResponse> performAction(
+            @PathVariable String playerId,
             @PathVariable String roomId,
             @PathVariable String objectId,
             @RequestBody ActionRequest request
     ) {
-        ActionResponse response = actionService.performAction(roomId, objectId, request.getActionType().getValue());
+        ActionResponse response = actionService.performAction(
+                playerId,
+                roomId,
+                objectId,
+                request.getActionType().getValue()
+        );
         return ResponseEntity.ok(response);
     }
 

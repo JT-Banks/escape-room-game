@@ -1,0 +1,295 @@
+{
+  "roomId": "1",
+  "roomName": "Annie's Room",
+  "story": "A 12-year-old girl with supernatural fire powers, manipulated by a demon trapped in her teddy bear named Scratcher. Annie accidentally burned down her family's cottage in the mountains, killing her mother, father, and older sister while defending them from brigands. A scientist studying the supernatural brought her to the asylum to study her powers, separating her from Scratcher.",
+
+  "gameObjects": [
+    {
+      "_id": "annies-door",
+      "name": "Cell Door",
+      "interactionType": "INTERACT",
+      "roomId": "1",
+      "interactionId": "door",
+      "description": "A heavy wooden door with no handle on the inside. It's locked from the outside, designed to keep someone imprisoned.",
+      "clues": [
+        "The door can only be opened from the outside.",
+        "Perhaps there's another way out of this room..."
+      ],
+      "actions": [
+        {
+          "actionType": "open",
+          "result": "The door won't budge. It's locked tight from the outside."
+        },
+        {
+          "actionType": "inspect",
+          "result": "The door is solid and old. You notice scratch marks near the bottom, as if someone desperately tried to claw their way out."
+        }
+      ],
+      "relatedObjects": ["vent", "cell-key"]
+    },
+
+    {
+      "_id": "wooden-desk",
+      "name": "Old Wooden Desk",
+      "interactionType": "INTERACT",
+      "roomId": "1",
+      "interactionId": "desk",
+      "description": "A weathered wooden desk with multiple drawers. The wood is scarred with small claw marks.",
+      "clues": [
+        "The desk has several drawers that can be opened.",
+        "Tiny claw marks cover one side of the desk.",
+        "There's a strange draft coming from underneath the desk."
+      ],
+      "actions": [
+        {
+          "actionType": "open",
+          "result": "You open the drawers and find several old letters written by Annie to her family. They speak of a 'friend' named Scratcher and strange powers she's discovered."
+        },
+        {
+          "actionType": "inspect",
+          "result": "The desk is covered in claw marks. Looking closer, you notice they're too small to be human. Underneath the desk, you spot a metal vent grate."
+        },
+        {
+          "actionType": "move",
+          "result": "You can't move the desk - it's bolted to the floor. But you can see underneath it clearly now."
+        }
+      ],
+      "relatedObjects": ["annies-letters", "scratcher-bear", "vent", "claw-marks"]
+    },
+
+    {
+      "_id": "vent",
+      "name": "Air Vent",
+      "interactionType": "INTERACT",
+      "roomId": "1",
+      "interactionId": "vent",
+      "description": "A metal grate covers an air vent underneath the desk. It looks like it hasn't been opened in years.",
+      "clues": [
+        "The vent is secured with screws.",
+        "This vent is large enough for someone small to crawl through.",
+        "You notice scratches around the edges, as if someone tried to pry it open many times."
+      ],
+      "actions": [
+        {
+          "actionType": "open",
+          "result": "The vent is screwed shut. You need something to unscrew it."
+        },
+        {
+          "actionType": "inspect",
+          "result": "Peering through the grate, you can see a key hanging on a hook just on the other side. If only you could reach it..."
+        },
+        {
+          "actionType": "use",
+          "result": "You use the screwdriver from the janitor's jacket to unscrew the vent. The grate falls away, revealing a dark passage. You crawl through and emerge on the other side, grabbing the cell key from the hook."
+        }
+      ],
+      "relatedObjects": ["cell-key", "wooden-desk"],
+      "requiresItem": "screwdriver"
+    },
+
+    {
+      "_id": "charred-wall",
+      "name": "Charred Wall",
+      "interactionType": "INSPECT",
+      "roomId": "1",
+      "interactionId": "charredWall",
+      "description": "The wall is blackened and charred, as if exposed to intense heat. Ash covers parts of the surface.",
+      "clues": [
+        "The burn patterns suggest the fire came from inside the room, not outside.",
+        "Words are written in ash: 'Scratcher promised to protect us'",
+        "The charring is most intense near the bed."
+      ],
+      "actions": [
+        {
+          "actionType": "inspect",
+          "result": "You brush away some ash and reveal more writing: 'I didn't mean to hurt them. The fire... it just happened. Scratcher said I had to defend myself.'"
+        }
+      ],
+      "relatedObjects": ["scratcher-bear", "burnt-drawing", "annies-letters"]
+    },
+
+    {
+      "_id": "metal-bed",
+      "name": "Metal Bed Frame",
+      "interactionType": "INTERACT",
+      "roomId": "1",
+      "interactionId": "bed",
+      "description": "A small metal bed with a thin, stained mattress. The springs squeak with any movement.",
+      "clues": [
+        "The mattress has a small indentation near the pillow, as if something small slept there regularly.",
+        "Claw marks cover the bed frame.",
+        "Something is hidden under the mattress."
+      ],
+      "actions": [
+        {
+          "actionType": "inspect",
+          "result": "You notice the indentation near the pillow is too small for a child. It's about the size of a teddy bear."
+        },
+        {
+          "actionType": "move",
+          "result": "You lift the mattress and find a charred piece of paper - a drawing done by a child. It shows a teddy bear with red eyes and sharp teeth. At the bottom it says: 'My friend Scratcher'."
+        }
+      ],
+      "relatedObjects": ["scratcher-bear", "burnt-drawing", "claw-marks"]
+    },
+
+    {
+      "_id": "scratcher-bear",
+      "name": "Scratcher (Teddy Bear)",
+      "interactionType": "INTERACT",
+      "roomId": "1",
+      "interactionId": "teddyBear",
+      "description": "A worn teddy bear sitting on a shelf. It has button eyes, but one is missing. Its paws end in unnaturally sharp 'claws' made of metal.",
+      "clues": [
+        "The teddy bear's remaining eye seems to watch you.",
+        "The metal claws match the claw marks throughout the room.",
+        "A tag on the bear reads: 'Found at midnight altar, forest grove'.",
+        "The bear smells faintly of sulfur and ash."
+      ],
+      "actions": [
+        {
+          "actionType": "inspect",
+          "result": "This isn't a normal teddy bear. The metal claws are sharp and deliberately crafted. Its stitching forms symbols you don't recognize. This is no child's toy - it's something far more sinister."
+        },
+        {
+          "actionType": "use",
+          "result": "As you touch the bear, you feel an unnatural warmth. For a moment, you hear whispers... promises of power... protection... The room suddenly feels colder."
+        }
+      ],
+      "relatedObjects": ["charred-wall", "claw-marks", "annies-letters", "burnt-drawing"]
+    },
+
+    {
+      "_id": "claw-marks",
+      "name": "Claw Marks",
+      "interactionType": "INSPECT",
+      "roomId": "1",
+      "interactionId": "clawMarks",
+      "description": "Small claw marks scattered throughout the room - on the desk, bed frame, floor, and even the door.",
+      "clues": [
+        "The claw marks are too small and precise to be from an animal.",
+        "They're most concentrated around the desk and bed.",
+        "The pattern suggests whatever made them moved freely around the room."
+      ],
+      "actions": [
+        {
+          "actionType": "inspect",
+          "result": "Examining the claw marks closely, you notice they match the metal claws on Scratcher's paws perfectly. Whatever made these marks wasn't trapped in the teddy bear form - it could move."
+        }
+      ],
+      "relatedObjects": ["scratcher-bear", "wooden-desk", "metal-bed"]
+    },
+
+    {
+      "_id": "burnt-drawing",
+      "name": "Burnt Drawing",
+      "interactionType": "INSPECT",
+      "roomId": "1",
+      "interactionId": "burntDrawing",
+      "description": "A child's drawing, partially burnt, showing a teddy bear with disturbing features.",
+      "clues": [
+        "The bear in the drawing has red eyes and sharp teeth.",
+        "Written at the bottom: 'My friend Scratcher - he helps me'",
+        "On the back: 'He showed me the fire. He says I'm special.'"
+      ],
+      "actions": [
+        {
+          "actionType": "inspect",
+          "result": "This drawing reveals Annie's perception of Scratcher. What she saw as a friend and protector was clearly something demonic. The red eyes and sharp teeth suggest she knew, on some level, what he truly was."
+        }
+      ],
+      "relatedObjects": ["scratcher-bear", "annies-letters"]
+    }
+  ],
+
+  "items": [
+    {
+      "_id": "annies-letters",
+      "name": "Annie's Letters",
+      "description": "A collection of letters written by Annie to her family, pleading for help and describing her strange new powers.",
+      "type": "clue",
+      "use": "read",
+      "content": [
+        "Letter 1: 'Dear Mother and Father, I miss home so much. I found a friend in the forest - he talks to me. His name is Scratcher. - Annie'",
+        "Letter 2: 'Scratcher says I have special gifts. He's teaching me things. Father would be proud. - Annie'",
+        "Letter 3: 'The brigands came last night. I was so scared. Scratcher said to defend us. I didn't mean for everyone to... the fire just...' (rest is burnt away)",
+        "Letter 4: 'They took Scratcher away. I'm alone here. I need to escape. The vent under the desk - I think I can fit through. If only I had a tool...' (unfinished)"
+      ]
+    },
+
+    {
+      "_id": "cell-key",
+      "name": "Cell Key",
+      "description": "An old iron key that unlocks Annie's cell door. Found hanging on a hook beyond the vent.",
+      "type": "key",
+      "use": "unlock"
+    },
+
+    {
+      "_id": "screwdriver",
+      "name": "Screwdriver",
+      "description": "A rusty screwdriver found in the janitor's jacket pocket. Can be used to unscrew the vent grate.",
+      "type": "tool",
+      "use": "unscrew"
+    }
+  ],
+
+  "puzzles": [
+    {
+      "id": "annies-story-puzzle",
+      "name": "Piece Together Annie's Story",
+      "description": "Discover the truth about Annie, Scratcher, and the tragic fire by finding and examining all clues in the room.",
+      "solution": "collect-all-clues",
+      "requiredClues": [
+        "annies-letters",
+        "burnt-drawing",
+        "charred-wall",
+        "scratcher-bear",
+        "claw-marks"
+      ],
+      "clues": [
+        "Read all of Annie's letters to understand her relationship with Scratcher.",
+        "Examine the teddy bear to discover its demonic nature.",
+        "Find the drawing under the mattress.",
+        "Inspect the charred wall to read her ash writings.",
+        "Notice the claw marks throughout the room."
+      ],
+      "reward": "Once you piece together the full story, you understand that the vent is the escape route."
+    },
+
+    {
+      "id": "vent-escape-puzzle",
+      "name": "Escape Through the Vent",
+      "description": "Find a way to open the vent underneath the desk and crawl through to freedom.",
+      "solution": "use-screwdriver-on-vent",
+      "requiredItems": [
+        "screwdriver"
+      ],
+      "clues": [
+        "The vent is screwed shut - you need a tool.",
+        "Annie mentions in her letters that she needed a tool to escape.",
+        "Perhaps items from other rooms can help (like the janitor's closet)."
+      ],
+      "reward": "You crawl through the vent and find the cell key on the other side, allowing you to unlock the door for other players."
+    }
+  ],
+
+  "winCondition": {
+    "description": "Solve Annie's story puzzle and escape through the vent to get the cell key",
+    "requirements": [
+      "Discover all 5 story clues",
+      "Find the screwdriver (from Bathroom/Janitor's Closet - Room 2)",
+      "Use screwdriver to open vent",
+      "Crawl through vent to get cell key",
+      "Unlock the cell door"
+    ]
+  },
+
+  "atmosphere": {
+    "mood": "Dark, eerie, tragic, desperate",
+    "soundscape": "Creaking metal, distant whispers, faint crying, wind through the vent",
+    "visualTheme": "Charred walls, dim lighting, cold metal, worn wood, ash residue",
+    "emotionalTone": "Players should feel empathy for Annie's tragedy while being unsettled by Scratcher's demonic presence"
+  }
+}
+

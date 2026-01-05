@@ -9,5 +9,45 @@ So, the clues to escape the room lie in discovering this story through key eleme
 Tiny claw marks riddled throughout the '
 room, namely on the floor and bed.
 
+Second revision of the story:
+Let's add more to Annie's room.
 
+First I'd like to explain what the first room of Asylum is, and what's expected.
+
+This room is called Annie's room, and each room as a story to tell. This is an important part to figuring out the entire puzzle, and it's meant to enrich the user's experience.
+
+Annie's room is a room where a little girl who demonstrated supernatural powers resided. She is 12 years old, and when she was younger she lived with her mom, dad, and older sister. They lived in a cottage in the mountains and forest, and mostly lived off the land. One day Annie discovered a grove in the forest, and she would visit it day after day. Each time she visited she could hear a voice speaking to her, and as time went on it got louder, clearer.
+
+One day when she arrived the voice told her to return at midnight, when she did an alter appeared and a teddy bear sat upon it.
+
+She took the teddy bear home and named his Scratcher. Over the next few months Annie became obsessed with Scratcher.
+
+Scratcher would tell her stories, and he would teach her things. One day Scratcher told Annie that she had powers, and that she could use them to help her family. You see occasionally
+Annie's family encountered thieves, bandits and violent criminals who would steal from them. One night, brigands came to their home and threatened them. Annie became scared and in a moment of panic she unleashed her powers, burning the brigands to ash, but
+unbeknownst to Annie she also burned down her home, killing her family. Their deaths were not instant, and for several agonizing moments Annie could hear their screams as they were burned alive...
+
+A scientist studying the supernatural discovered Annie and took her to the asylum to study her powers. Annie was locked away in a room, and Scratcher was taken from her.
+
+Important Notes:
+ - Annie's room should have clues about her past, such as charred walls, claw marks, and letters.
+    - The player should be able to piece together Annie's story through these clues.
+    - Scratcher should be a key element in the room, perhaps as a toy on the bed or a drawing on the wall.
+    - The vent under the desk should be the escape route, but it should be locked and require solving puzzles to open it.
+    - The room should have a dark, eerie atmosphere to reflect Annie's tragic story.
+    - The player should feel a sense of urgency and desperation to escape the room, mirroring Annie's own desire to escape her tragic past.
+    - Scratcher is secretly a demon, and this could be hinted at through subtle clues in the room, such as drawings or writings by Annie.
+    - The player should feel a sense of empathy for Annie and her tragic story, making the escape more meaningful.
+ - How to solve the puzzle:
+    - The player must find and read letters written by Annie to her family, which provide clues about her past and hint at the escape route (vent).
+    - The player must find and interpret claw marks on the floor and bed, which provide clues about Scratcher's true nature.
+    - The player must solve puzzles related to fire, such as lighting candles or burning certain objects, to unlock the vent.
+    - The player must piece together the story of Annie and Scratcher to understand the significance of the clues and how to escape the room.
+        - This is ultimately done by finding all the clues:
+            - Letters from Annie
+            - Claw marks
+            - Charred walls
+            - Scratcher (the teddy bear)
+            - Desk with vent underneath
+    - Once all clues are found and puzzles solved, the vent can be unlocked and the player via a logical control mechanism once the clues are satisfied.
+    - Once the player crawls through the vent, on the other side there is a key dangling from a hook, which unlocks the door to Annie's room (for multiplier purposes).
 

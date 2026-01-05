@@ -17,6 +17,6 @@ public class GameObject {
     private String interactionId;
     private String description;
     private List<String> clues;
-    private List<Action> actions;
+    private List<com.thefinaldoor.generated.model.Action> actions;
     private List<String> relatedObjects;
 }

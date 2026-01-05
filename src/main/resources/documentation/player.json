@@ -1,17 +1,20 @@
-[{
+{
+    "_id": "edd18800-c955-4d8f-b24f-4dc0a938e4c1",
+    "playerName": "Jack",
+    "background": "Once an ordinary boy, but now has dabbled a little too much into necromancy...",
+    "difficultyLevel": "Medium",
+    "specialAbility": "Time stop",
+    "starterItem": "notepad & pen",
     "status": "PLAYING",
-    "playerId": "091",
     "currentRoomId": "1",
     "interactionId": "1",
-    "inventory": [
-        "flashlight_itemId", "unique-room-key_itemId"
-
-    ],
+    "inventoryId": "edd18800-c955-4d8f-b24f-4dc0a938e4c1",
     "actions": [
         {
-            "inspect": "uhhhh"
+            "actionType": "INSPECT"
         }
     ],
-    "timeRemaining": 2500,
-    "score": 0
-}]
+    "timeRemaining": 60,
+    "score": 0,
+    "_class": "com.thefinaldoor.core.models.Player"
+}
