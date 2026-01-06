@@ -121,14 +121,10 @@ public class ActionService {
     }
 
     private boolean playerHasItem(String playerId, String itemId) {
-        try {
-            var inventory = inventoryService.getEntireInventory(playerId);
-            return inventory.getItems() != null &&
-                   inventory.getItems().stream()
-                       .anyMatch(item -> item.getId().equals(itemId));
-        } catch (Exception e) {
-            return false;
-        }
+        var inventory = inventoryService.getEntireInventory(playerId);
+        return inventory.getItems() != null &&
+               inventory.getItems().stream()
+                   .anyMatch(item -> item.getId().equals(itemId));
     }
 }
 
