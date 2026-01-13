@@ -1,88 +1,198 @@
-//Annie's Room
+// Annie's Room - Game Objects
+[
 {
-    "name": "door",
-    "isDiscovered": false,
-    "interactionType": "INSPECT",
+    "_id": "annies-door",
+    "name": "Cell Door",
+    "interactionType": "INTERACT",
     "roomId": "1",
-    "interactionId": "door", //Possibly change to objectId, example: "door1", or "3023For"
-    "description": "A large wooden door. The door has no handle, and appears to be locked.",
+    "interactionId": "door",
+    "description": "A heavy wooden door with no handle on the inside. It's locked from the outside, designed to keep someone imprisoned.",
     "clues": [
-        "This door is clearly meant to keep someone in, however, you can't seem to find a way to open it."
+        "The door can only be opened from the outside.",
+        "Perhaps there's another way out of this room..."
     ],
     "actions": [
         {
-            "actionType": "OPEN",
-            "result": "The door is locked."
+            "actionType": "open",
+            "result": "The door won't budge. It's locked tight from the outside."
         },
         {
-            "actionType": "INSPECT",
-            "result": "The door is locked. How will you get out?"
+            "actionType": "inspect",
+            "result": "The door is solid and old. You notice scratch marks near the bottom, as if someone desperately tried to claw their way out."
         }
     ],
-    "relatedObjects": ["letters", "desk"]
-}
+    "relatedObjects": ["vent", "cell-key"]
+},
 
 {
-    "name": "desk",
-    "interactionType": "INSPECT",
+    "_id": "wooden-desk",
+    "name": "Old Wooden Desk",
+    "interactionType": "INTERACT",
     "roomId": "1",
     "interactionId": "desk",
-    "description": "An old wooden desk with many drawers. It looks like it's been here for ages.",
+    "description": "A weathered wooden desk with multiple drawers. The wood is scarred with small claw marks.",
     "clues": [
-        "There are several letters inside the desk.",
-        "The desk has tiny claw marks on one side."
+        "The desk has several drawers that can be opened.",
+        "Tiny claw marks cover one side of the desk.",
+        "There's a strange draft coming from underneath the desk."
     ],
     "actions": [
         {
-            "actionType": "OPEN",
-            "result": "You find several old letters."
+            "actionType": "open",
+            "result": "You open the drawers and find several old letters written by Annie to her family. They speak of a 'friend' named Scratcher and strange powers she's discovered."
         },
         {
-            "actionType": "INSPECT",
-            "result": "You notice claw marks that look like they were made by a small animal."
+            "actionType": "inspect",
+            "result": "The desk is covered in claw marks. Looking closer, you notice they're too small to be human. Underneath the desk, you spot a metal vent grate."
+        },
+        {
+            "actionType": "move",
+            "result": "You can't move the desk - it's bolted to the floor. But you can see underneath it clearly now."
         }
     ],
-    "relatedObjects": ["teddyBear", "charredWall", "letters"]
-}
+    "relatedObjects": ["annies-letters", "scratcher-bear", "vent", "claw-marks"]
+},
 
 {
-    "name": "charredWall",
+    "_id": "vent",
+    "name": "Air Vent",
+    "interactionType": "INTERACT",
+    "roomId": "1",
+    "interactionId": "vent",
+    "description": "A metal grate covers an air vent underneath the desk. It looks like it hasn't been opened in years.",
+    "clues": [
+        "The vent is secured with screws.",
+        "This vent is large enough for someone small to crawl through.",
+        "You notice scratches around the edges, as if someone tried to pry it open many times."
+    ],
+    "actions": [
+        {
+            "actionType": "open",
+            "result": "The vent is screwed shut. You need something to unscrew it."
+        },
+        {
+            "actionType": "inspect",
+            "result": "Peering through the grate, you can see a key hanging on a hook just on the other side. If only you could reach it..."
+        },
+        {
+            "actionType": "use",
+            "result": "You use the screwdriver to unscrew the vent. The grate falls away, revealing a dark passage. You crawl through and emerge on the other side, grabbing the cell key from the hook."
+        }
+    ],
+    "relatedObjects": ["cell-key", "wooden-desk"]
+},
+
+{
+    "_id": "charred-wall",
+    "name": "Charred Wall",
     "interactionType": "INSPECT",
     "roomId": "1",
     "interactionId": "charredWall",
-    "description": "The wall is charred and blackened. It looks like it was burned.",
+    "description": "The wall is blackened and charred, as if exposed to intense heat. Ash covers parts of the surface.",
     "clues": [
-        "The wall is charred and blackened. It looks like it was burned, but how?",
-        "There appears to be a name written on the wall in ash... but you can't make it out fully...Something about a 'Teddy'...?"
+        "The burn patterns suggest the fire came from inside the room, not outside.",
+        "Words are written in ash: 'Scratcher promised to protect us'",
+        "The charring is most intense near the bed."
     ],
     "actions": [
         {
-            "actionType": "INSPECT",
-            "result": "You notice a small hole in the wall."
+            "actionType": "inspect",
+            "result": "You brush away some ash and reveal more writing: 'I didn't mean to hurt them. The fire... it just happened. Scratcher said I had to defend myself.'"
         }
     ],
-    "relatedObjects": ["teddyBear", "desk"]
-}
+    "relatedObjects": ["scratcher-bear", "burnt-drawing", "annies-letters"]
+},
 
 {
-    "name": "bed",
-    "interactionType": "INSPECT",
+    "_id": "metal-bed",
+    "name": "Metal Bed Frame",
+    "interactionType": "INTERACT",
     "roomId": "1",
     "interactionId": "bed",
-    "description": "A small bed with a metal frame. The springs appear to provide little support...",
+    "description": "A small metal bed with a thin, stained mattress. The springs squeak with any movement.",
     "clues": [
-        "The bed is tattered, and without sheets.",
-        "There is a small impression in a corner of the bed, as if something small had been sleeping there..."
+        "The mattress has a small indentation near the pillow, as if something small slept there regularly.",
+        "Claw marks cover the bed frame.",
+        "Something is hidden under the mattress."
     ],
     "actions": [
         {
-            "actionType": "INSPECT",
-            "result": "Nothing particularly interesting about the bed."
+            "actionType": "inspect",
+            "result": "You notice the indentation near the pillow is too small for a child. It's about the size of a teddy bear."
         },
         {
-            "actionType": "MOVE",
-            "result": "You move the bed and notice a burnt piece of paper...you can only make out a few words...something about a 'Scratcher'...?"
+            "actionType": "move",
+            "result": "You lift the mattress and find a charred piece of paper - a drawing done by a child. It shows a teddy bear with red eyes and sharp teeth. At the bottom it says: 'My friend Scratcher'."
         }
     ],
-    "relatedObjects": ["teddyBear", "letters"]
+    "relatedObjects": ["scratcher-bear", "burnt-drawing", "claw-marks"]
+},
+
+{
+    "_id": "scratcher-bear",
+    "name": "Scratcher (Teddy Bear)",
+    "interactionType": "INTERACT",
+    "roomId": "1",
+    "interactionId": "teddyBear",
+    "description": "A worn teddy bear sitting on a shelf. It has button eyes, but one is missing. Its paws end in unnaturally sharp 'claws' made of metal.",
+    "clues": [
+        "The teddy bear's remaining eye seems to watch you.",
+        "The metal claws match the claw marks throughout the room.",
+        "A tag on the bear reads: 'Found at midnight altar, forest grove'.",
+        "The bear smells faintly of sulfur and ash."
+    ],
+    "actions": [
+        {
+            "actionType": "inspect",
+            "result": "This isn't a normal teddy bear. The metal claws are sharp and deliberately crafted. Its stitching forms symbols you don't recognize. This is no child's toy - it's something far more sinister."
+        },
+        {
+            "actionType": "use",
+            "result": "As you touch the bear, you feel an unnatural warmth. For a moment, you hear whispers... promises of power... protection... The room suddenly feels colder."
+        }
+    ],
+    "relatedObjects": ["charred-wall", "claw-marks", "annies-letters", "burnt-drawing"]
+},
+
+{
+    "_id": "claw-marks",
+    "name": "Claw Marks",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "clawMarks",
+    "description": "Small claw marks scattered throughout the room - on the desk, bed frame, floor, and even the door.",
+    "clues": [
+        "The claw marks are too small and precise to be from an animal.",
+        "They're most concentrated around the desk and bed.",
+        "The pattern suggests whatever made them moved freely around the room."
+    ],
+    "actions": [
+        {
+            "actionType": "inspect",
+            "result": "Examining the claw marks closely, you notice they match the metal claws on Scratcher's paws perfectly. Whatever made these marks wasn't trapped in the teddy bear form - it could move."
+        }
+    ],
+    "relatedObjects": ["scratcher-bear", "wooden-desk", "metal-bed"]
+},
+
+{
+    "_id": "burnt-drawing",
+    "name": "Burnt Drawing",
+    "interactionType": "INSPECT",
+    "roomId": "1",
+    "interactionId": "burntDrawing",
+    "description": "A child's drawing, partially burnt, showing a teddy bear with disturbing features.",
+    "clues": [
+        "The bear in the drawing has red eyes and sharp teeth.",
+        "Written at the bottom: 'My friend Scratcher - he helps me'",
+        "On the back: 'He showed me the fire. He says I'm special.'"
+    ],
+    "actions": [
+        {
+            "actionType": "inspect",
+            "result": "This drawing reveals Annie's perception of Scratcher. What she saw as a friend and protector was clearly something demonic. The red eyes and sharp teeth suggest she knew, on some level, what he truly was."
+        }
+    ],
+    "relatedObjects": ["scratcher-bear", "annies-letters"]
 }
+]

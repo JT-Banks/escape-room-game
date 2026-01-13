@@ -1,0 +1,20 @@
+[{
+    "_id": "player-id-123",
+    "playerId": "player-id-123",
+    "items": [
+        {
+            "_id": "flashlight",
+            "name": "Flashlight",
+            "description": "A flashlight to help you see in the dark",
+            "type": "tool",
+            "use": "illuminate"
+        },
+        {
+            "_id": "cell-key",
+            "name": "Cell Key",
+            "description": "An old key with intricate designs, its purpose unknown",
+            "type": "key",
+            "use": "unlock"
+        }
+    ]
+}]

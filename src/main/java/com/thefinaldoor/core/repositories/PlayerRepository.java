@@ -11,6 +11,8 @@ public interface PlayerRepository extends MongoRepository<Player, String> {
 
     Optional<Player> findByPlayerId(String playerId);
 
+    Optional<Player> findByPlayerName(String playerName);
+
     Player save(Player player);
 }
 

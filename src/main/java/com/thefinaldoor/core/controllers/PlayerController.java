@@ -1,5 +1,6 @@
 package com.thefinaldoor.core.controllers;
 
+import com.thefinaldoor.core.exceptions.PlayerNotFoundException;
 import com.thefinaldoor.core.repositories.PlayerRepository;
 import com.thefinaldoor.core.services.PlayerService;
 import com.thefinaldoor.generated.model.PlayerCreationResponse;
@@ -23,10 +24,7 @@ public class PlayerController {
     private final PlayerService playerService;
 
     @Autowired
-    public PlayerController(
-            PlayerRepository playerRepository,
-            PlayerService playerService
-    ) {
+    public PlayerController(PlayerRepository playerRepository, PlayerService playerService) {
         this.playerRepository = playerRepository;
         this.playerService = playerService;
     }
@@ -41,8 +39,14 @@ public class PlayerController {
 
     @GetMapping("/{playerId}")
     public ResponseEntity<Player> getPlayer(@PathVariable String playerId) {
-        Player player = playerRepository.findByPlayerId(playerId).orElseThrow(()
-                -> new RuntimeException("Player not found"));
+        Player player = playerRepository.findByPlayerId(playerId)
+                .orElseThrow(() -> new PlayerNotFoundException(playerId));
+        return new ResponseEntity<>(player, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-name/{playerName}")
+    public ResponseEntity<Player> getPlayerByName(@PathVariable String playerName) {
+        Player player = playerService.getPlayerByName(playerName);
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 

@@ -5,6 +5,13 @@ spring:
     mongodb:
       uri: ${MONGODB_URI:mongodb://localhost:27017/Game}
 
+server:
+  error:
+    include-exception: false
+    include-stacktrace: never
+    include-message: always
+    include-binding-errors: always
+
 springdoc:
   api-docs:
     path: /api-docs

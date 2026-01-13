@@ -25,23 +25,8 @@ public class InteractionService {
         interactionResponse.setName(gameObject.getName());
         interactionResponse.setDescription(gameObject.getDescription());
         interactionResponse.setClues(gameObject.getClues());
-
-        if (gameObject.getActions() != null) {
-            interactionResponse.setActions(
-                gameObject.getActions().stream()
-                    .map(this::convertAction)
-                    .toList()
-            );
-        }
-
+        interactionResponse.setActions(gameObject.getActions());
         interactionResponse.setRelatedObjects(gameObject.getRelatedObjects());
         return interactionResponse;
-    }
-
-    private com.thefinaldoor.generated.model.Action convertAction(com.thefinaldoor.asylum.model.Action asylumAction) {
-        com.thefinaldoor.generated.model.Action generatedAction = new com.thefinaldoor.generated.model.Action();
-        generatedAction.setActionType(asylumAction.getActionType() != null ? asylumAction.getActionType().toString() : null);
-        generatedAction.setResult(asylumAction.getResult());
-        return generatedAction;
     }
 }

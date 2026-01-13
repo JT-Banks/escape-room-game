@@ -1,8 +1,6 @@
 package com.thefinaldoor.asylum.controllers;
 
-import com.thefinaldoor.asylum.model.Room;
 import com.thefinaldoor.asylum.services.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +19,7 @@ public class RoomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Room>> getAllRooms() {
+    public ResponseEntity<List<com.thefinaldoor.generated.model.Room>> getAllRooms() {
         return ResponseEntity.ok(roomService.getAllRooms());
     }
 }

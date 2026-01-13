@@ -15,12 +15,14 @@ public class Room {
     private String name;
     private String description;
     private boolean isLocked;
-    private List<Item> items;
-    private List<Puzzle> puzzles;
+    private List<com.thefinaldoor.generated.model.Item> items;
+    private List<com.thefinaldoor.generated.model.Puzzle> puzzles;
     private List<String> hints;
 
     public Room(String id, String name, String description, boolean isLocked,
-                List<Item> items, List<Puzzle> puzzles, List<String> hints) {
+                List<com.thefinaldoor.generated.model.Item> items,
+                List<com.thefinaldoor.generated.model.Puzzle> puzzles,
+                List<String> hints) {
         this.id = id;
         this.name = name;
         this.description = description;

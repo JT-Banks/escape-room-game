@@ -312,8 +312,6 @@ components:
       properties:
         id:
           type: string
-        itemId:
-          type: string
         name:
           type: string
         description:
